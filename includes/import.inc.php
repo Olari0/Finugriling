@@ -863,13 +863,13 @@
 		// (patterns must be specified as perl-style regular expression, without the leading & trailing slashes, if not stated otherwise)
 
 		// Pattern by which the input text will be split into individual records:
-		$recordDelimiter = "\s*[\r\n]ER  - *[\r\n]*\s*";
+		$recordDelimiter = '\s*[\r\n]ER\s+-\s*[\r\n]*\s*';
 
 		// Pattern by which records will be split into individual fields:
-		$fieldDelimiter = "[\r\n]+(?=\w\w  - )";
+		$fieldDelimiter = '[\r\n]+(?=\w\w\s+-\s*)';
 
 		// Pattern by which fields will be split into their field label (tag) and field data:
-		$dataDelimiter = "(?<=^\w\w)  - ";
+		$dataDelimiter = '(?<=^\w\w)\s+-\s+';
 
 		// Pattern by which multiple persons are separated within the author, editor or series editor fields of the source data:
 		// (Notes: - name standardization occurs after multiple author fields have been merged by '; '
@@ -902,9 +902,9 @@
 		// 								  "/Search Pattern/"  =>  "Replace Pattern"
 		$preprocessorActionsArray = array(
 											array(
-													'match'   => "/&#?\w+;/", // if HTML encoded text (such as "&auml;", "&#xF6;" or "&#233;") occurs in the source data
+													'match'   => '/&#?\w+;/', // if HTML encoded text (such as "&auml;", "&#xF6;" or "&#233;") occurs in the source data
 													'actions' => array(
-																		"/(&#?\w+;)/e"  =>  "html_entity_decode('\\1', ENT_QUOTES, '$contentTypeCharset')" // HTML decode source data (see <http://www.php.net/manual/en/function.html-entity-decode.php>)
+																		'/(&#?\w+;)/e'  =>  "html_entity_decode('\\1', ENT_QUOTES, '$contentTypeCharset')" // HTML decode source data (see <http://www.php.net/manual/en/function.html-entity-decode.php>)
 																	)
 												)
 										);
@@ -974,7 +974,7 @@
 		//  the search patterns MUST include the leading & trailing slashes.)
 		// 				"tag display name"  =>  "tag search pattern"
 		$requiredTagsArray = array(
-									"TY"    =>  "/^TY  - /m"
+									"TY"    =>  '/^TY\s+-\s+/m'
 								);
 
 		// This array matches RIS tags with their corresponding refbase fields:
@@ -2463,7 +2463,7 @@
 			$sourceFormat = "ISI";
 
 		// RIS format:
-		elseif (preg_match("/^TY  - /m", $sourceText) AND preg_match("/^ER  -/m", $sourceText)) // RIS records must at least start with the "TY" tag and end with an "ER" tag (we'll only check for their presence, though)
+		elseif (preg_match('/^TY\s+-\s+\w+\n/m', $sourceText) AND preg_match('/^ER\s+-/m', $sourceText)) // RIS records must at least start with the "TY" tag and end with an "ER" tag (we'll only check for their presence, though)
 			$sourceFormat = "RIS";
 
 		// RefWorks format:
@@ -3059,7 +3059,7 @@
 		//     (e.g. 'Matthias Steffens (refbase@extracts.de)')
 		//
 		//   - if the 'prefix_call_number' element of the 'options' array is set to "true", any 'call_number' string will be prefixed with
-		//     the correct call number prefix of the currently logged-in user (e.g. 'IPÖ @ msteffens @ ')
+		//     the correct call number prefix of the currently logged-in user (e.g. 'IPï¿½ @ msteffens @ ')
 		//
 		//   - the serial number(s) will be assigned automatically and returned by the 'addRecords()' function in form of an array
 

@@ -662,7 +662,7 @@
 	//                 ['author']   =>  "Matthias Steffens" // optional; the name of the person who developed the script/importer and/or who can be contacted in case of problems
 	//                 ['contact']  =>  "refbase@extracts.de" // optional; the contact address of the person specified under 'author', use an email address if possible
 	//                 ['options']  =>  array( // optional; array with settings that control the behaviour of the 'addRecords()' function, currently there's only one option:
-	//                                         [prefix_call_number] => "true" // if "true", any 'call_number' string will be prefixed with the correct call number prefix of the currently logged-in user (e.g. 'IPÖ @ msteffens @ ')
+	//                                         [prefix_call_number] => "true" // if "true", any 'call_number' string will be prefixed with the correct call number prefix of the currently logged-in user (e.g. 'IPï¿½ @ msteffens @ ')
 	//                                       )
 	//               )
 	function addRecords($importDataArray)
@@ -871,10 +871,10 @@
 						// we only honour the 'call_number' string if some other record data were passed as well:
 						// 
 						// if the 'prefix_call_number' option is set to "true", any 'call_number' string will be prefixed with
-						// the correct call number prefix of the currently logged-in user (e.g. 'IPÖ @ msteffens @ '):
+						// the correct call number prefix of the currently logged-in user (e.g. 'IPï¿½ @ msteffens @ '):
 						if ((isset($_SESSION['loginEmail'])) AND (isset($importDataArray['options']['prefix_call_number'])) AND ($importDataArray['options']['prefix_call_number'] == "true"))
 						{
-							$callNumberPrefix = getCallNumberPrefix(); // build a correct call number prefix for the currently logged-in user (e.g. 'IPÖ @ msteffens')
+							$callNumberPrefix = getCallNumberPrefix(); // build a correct call number prefix for the currently logged-in user (e.g. 'IPï¿½ @ msteffens')
 
 							if (!empty($recordData['call_number']))
 								$queryRefs .= "call_number = " . quote_smart($callNumberPrefix . " @ " . $recordData['call_number']) . ", "; // add call number prefix to 'call_number' string
@@ -2043,7 +2043,7 @@ EOF;
 		foreach($userMainFieldsArray as $userMainField)
 		{
 			// generate the variable name of the correct '$loc' locale for this field:
-			$dropDownFieldNameLocale = preg_replace("/_(\w)/e", "ucfirst('\\1')", $userMainField); // the 'e' modifier allows to execute PHP code within the replacement pattern
+			$dropDownFieldNameLocale = preg_replace_callback("/_(\w)/", function ($m) { return ucfirst($m[1]);}, $userMainField); // the 'e' modifier allows to execute PHP code within the replacement pattern
 			$dropDownFieldNameLocale = "DropDownFieldName_" . ucfirst($dropDownFieldNameLocale);
 			// add this field's name and localized string to the array of fields that will be included in the "Quick Search" drop-down menu:
 			$dropDownFieldNameArray[$userMainField] = $loc[$dropDownFieldNameLocale];
@@ -3958,21 +3958,30 @@ EOF;
 	//                    according to the current user's prefs) -PLUS- the list of all of the user's existing cite keys
 	//       - on export: for records that just have been exported, the list of cite keys (generated according to the current
 	//                    user's prefs) for all exported records
-	function ensureUniqueCiteKey($citeKey)
+	function ensureUniqueCiteKey($citeKey, $level=1)
 	{
 		global $citeKeysArray; // '$citeKeysArray' is made globally available from within this function
 
 		if (!isset($citeKeysArray))
 			$citeKeysArray = array(); // initialize array variable
 
+        if ($level >= 50) {
+            $citeKey= rand(1, 999999);
+        }
+
 		if (isset($citeKeysArray[$citeKey])) // if this cite key already exists
 		{
-			if (preg_match("/(?<=_)\d+$/", $citeKey)) // if this cite key already contains a suffix such as "_2" we assume it to be the old number of occurrence
-				$citeKey = preg_replace("/(?<=_)(\d+)$/e", "'\\1' + 1", $citeKey); // increment the old number of occurrence (that already exists in this cite key) by 1
-			else
-				$citeKey = $citeKey . "_2"; // append a number of occurrence to this cite key
+            if (preg_match('/(?<=_)\d+$/', $citeKey)) { // if this cite key already contains a suffix such as "_2" we assume it to be the old number of occurrence
+                $citeKey= rand(1, 999999);
+//				$citeKey = preg_replace_callback('/(?<=_)(\d+)$/', function ($m) {
+//                        //"'\\1' + 1"
+//                        return $m[1] + 1;
+//                    }, $citeKey); // increment the old number of occurrence (that already exists in this cite key) by 1
+            } else {
+                $citeKey = $citeKey . "_2";
+            } // append a number of occurrence to this cite key
 
-			$citeKey = ensureUniqueCiteKey($citeKey); // recurse, to check again whether the generated cite key already exists
+			$citeKey = ensureUniqueCiteKey($citeKey,$level++); // recurse, to check again whether the generated cite key already exists
 		}
 		else
 		{
@@ -4429,7 +4438,7 @@ EOF;
 
 	// --------------------------------------------------------------------
 
-	// Build a correct call number prefix for the currently logged-in user (e.g. 'IPÖ @ msteffens'):
+	// Build a correct call number prefix for the currently logged-in user (e.g. 'IPï¿½ @ msteffens'):
 	function getCallNumberPrefix()
 	{
 		global $loginEmail;
@@ -5300,10 +5309,10 @@ EOF;
 			$sourceString = strtoupper($sourceString);
 
 		elseif (preg_match("/title/i", $transformation)) // change source text to title case
-			$sourceString = preg_replace("/\b(\w)(\w+)/e", "strtoupper('\\1').strtolower('\\2')", $sourceString); // the 'e' modifier allows to execute PHP code within the replacement pattern
+			$sourceString = preg_replace_callback('/\b(\w)(\w+)/', function ($m){return strtoupper($m[1]).strtolower($m[2]);}, $sourceString); // the 'e' modifier allows to execute PHP code within the replacement pattern
 
 		elseif (preg_match("/heading/i", $transformation)) // change source text to heading case (opposed to 'title', we only touch words with more than 3 chars, and we only change the case of the first letter but not any subsequent ones)
-			$sourceString = preg_replace("/\b(\w)(\w{3,})/e", "strtoupper('\\1').'\\2'", $sourceString); // the 'e' modifier allows to execute PHP code within the replacement pattern
+			$sourceString = preg_replace_callback('/\b(\w)(\w{3,})/',function ($m){return  strtoupper($m[1]).$m[2];}, $sourceString); // the 'e' modifier allows to execute PHP code within the replacement pattern
 
 		return $sourceString;
 	}
@@ -5683,8 +5692,14 @@ EOF;
 		// Assembled from user contributions at <http://www.php.net/html-entity-decode>
 
 		// - Replace numeric entities:
-		$convertedString = preg_replace('/&#x0*([0-9a-f]+);/ei', "charNumToCharString('$targetCharset', hexdec('\\1'))", $sourceString); // hex notation
-		$convertedString = preg_replace('/&#0*([0-9]+);/e', "charNumToCharString('$targetCharset', '\\1')", $convertedString); // decimal notation
+		$convertedString = preg_replace_callback('/&#x0*([0-9a-f]+);/i', function ($m) use ($targetCharset){
+                //"charNumToCharString('$targetCharset', hexdec('\\1'))"
+                return charNumToCharString($targetCharset, hexdec($m[1]));
+            }, $sourceString); // hex notation
+		$convertedString = preg_replace_callback('/&#0*([0-9]+);/', function ($m) use ($targetCharset) {
+                //"charNumToCharString('$targetCharset', '\\1')"
+                return charNumToCharString($targetCharset, $m[1]);
+            }, $convertedString); // decimal notation
 
 		// - Replace literal entities:
 		if (!isset($transtab_HTML))

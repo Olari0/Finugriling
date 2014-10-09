@@ -32,13 +32,13 @@
 	// --------------------------------------------------------------------
 
 	// The host name of your MySQL installation:
-	$hostName = "localhost"; // e.g.: "localhost"
+	$hostName = "mysql7.000webhost.com"; // e.g.: "localhost"
 
 	// The name of the MySQL database that you're planning to use with the
 	// refbase package:
 	// Note: - if there's no existing database with the specified name,
 	//         the 'install.php' script will create it for you
-	$databaseName = "literature"; // e.g.: "literature"
+	$databaseName = "a7769848_db"; // e.g.: "literature"
 
 	// The name of the MySQL user that's going to be used with your MySQL
 	// literature database:
@@ -46,11 +46,11 @@
 	//         user that has full administrative privileges like the root user!)
 	//       - if there's no existing MySQL user with the specified name,
 	//         the 'install.php' script will create this user for you
-	$username = "litwww"; // e.g.: "litwww"
+	$username = "a7769848_usr"; // e.g.: "litwww"
 
 	// The password by which the above MySQL user will be granted access to
 	// your MySQL literature database:
-	$password = "%l1t3ratur3?"; // e.g.: "%l1t3ratur3?"
+	$password = "asdaa1"; // e.g.: "%l1t3ratur3?"
 
 	// --------------------------------------------------------------------
 

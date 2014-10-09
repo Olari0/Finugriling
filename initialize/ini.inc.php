@@ -23,7 +23,7 @@
 	// --------------------------------------------------------------------
 
 	// The official name of this literature database:
-	$officialDatabaseName = "Your Literature Database"; // e.g. "IP� Literature Database"
+	$officialDatabaseName = "Bibliography of Finno-Ugric Linguistics"; // e.g. "IP� Literature Database"
 
 
 	// Specify who'll be allowed to add a new user to the users table:
@@ -48,15 +48,15 @@
 
 
 	// The full name of the institution hosting this literature database:
-	$hostInstitutionName = "Institute for ..."; // e.g. "Institute for Polar Ecology"
+	$hostInstitutionName = "Institute of Estonian and General Linguistics"; // e.g. "Institute for Polar Ecology"
 
 
 	// The abbreviated name of the institution hosting this literature database:
-	$hostInstitutionAbbrevName = "..."; // e.g. "IP�"
+	$hostInstitutionAbbrevName = "IEG"; // TODO: find correct
 
 
 	// The URL of the institution hosting this literature database:
-	$hostInstitutionURL = "INSTITUTION_WEB_ADDRESS"; // e.g. "http://www.uni-kiel.de/ipoe/"
+	$hostInstitutionURL = "http://www.keel.ut.ee/en"; // e.g. "http://www.uni-kiel.de/ipoe/"
 
 
 	// The URL to any (custom) help resources for this literature database:
@@ -71,7 +71,7 @@
 
 
 	// The mailing list email address to which any announcements should be sent:
-	$mailingListEmail = "ANNOUNCEMENT_EMAIL_ADDRESS"; // e.g. "ipoelit-announce@ipoe.uni-kiel.de"
+	$mailingListEmail = "tormit@ut.ee"; // temporary. Real: eriala.keeleteadus@lists.ut.ee
 
 
 	// The base URL for this literature database (i.e., the URL to the refbase root directory where
@@ -86,7 +86,7 @@
 	// These keywords/tags should be single words delimited by a space character. They'll be
 	// included on every HTML page (in the <head> section) as well as in the OpenSearch description
 	// document. A good selection of keywords may help to increase search engine visibility.
-	$databaseKeywords = "science academic literature scientific references publication search citation web bibliography database mysql php refbase"; // e.g. "academic literature refbase"
+	$databaseKeywords = "finno-ugric academic literature scientific references publication search citation bibliography database"; // e.g. "academic literature refbase"
 
 
 	// The character encoding that's used as content-type for HTML, RSS and email output:
@@ -95,7 +95,7 @@
 	//                  - plus, the character encoding of this file ('ini.inc.php') MUST match the
 	//                    encoding type specified in '$contentTypeCharset'! This means, if you're going to
 	//                    use "UTF-8", you must re-save this file with encoding "Unicode (UTF-8, no BOM)".
-	$contentTypeCharset = "ISO-8859-1"; // possible values: "ISO-8859-1", "UTF-8"
+	$contentTypeCharset = "UTF-8"; // possible values: "ISO-8859-1", "UTF-8"
 
 
 	// In case you're using a latin1-encoded database ('$contentTypeCharset=ISO-8859-1'), specify whether
@@ -276,7 +276,7 @@
 	// The list of fields that will be displayed by default in List view (i.e. the default
 	// columnar output style):
 	// (specify a comma-separated list of fields from MySQL table 'refs')
-	// 
+	//
 	// - These "major" fields will be always included by default:
 	$defaultFieldsListViewMajor = "author, title, year, publication"; // e.g. "author, title, year, publication"
 
@@ -291,7 +291,7 @@
 	// results header:
 	// (given field names must match column names in MySQL tables 'refs' and 'user_data';
 	//  you can change the order of fields to control the field order in the drop-down menus)
-	// 
+	//
 	// - These fields will be visible for all users, no matter whether they are logged in or not:
 	$defaultDropDownFieldsEveryone = array("author", "title", "year", "keywords", "abstract",
 	                                       "type", "publication", "abbrev_journal", "volume",
@@ -591,7 +591,7 @@
 	// specify an empty string (or "[|]") to use the maximum possible range: '$extractDetailsRandomNumberDefault = "";'
 	$extractDetailsRandomNumberDefault = "[0|99999]"; // e.g. "[0|99999]"
 
-	
+
 	// The default view that is displayed for found results:
 	//   - "List" will produce the columnar output style (List view)
 	//   - "Cite" returns found records as citations (Citation view)
@@ -629,7 +629,7 @@
 	//  see comments for '$defaultView' for more info on the different view types)
 	// Possible view types:     "List", "Cite", "Display", "Browse"
 	// Possible display values: "open", "closed", "hidden"
-	// 
+	//
 	// - Results header:
 	//                                   "view type" => "display value"
 	$displayResultsHeaderDefault = array("List"      => "closed",
@@ -650,7 +650,7 @@
 	// (note that for List and Citation view, only one link will be printed for links of type
 	// url/doi/isbn/xref; order of preference: doi, url, isbn, xref)
 	// Possible array items: "details", "edit", "file", "url", "doi", "isbn", "xref"
-	// 
+	//
 	// - List view:
 	$showLinkTypesInListView = array("details", "edit", "file", "url", "doi", "isbn", "xref");
 
@@ -664,8 +664,8 @@
 	//  completely disable this feature for all views, specify an empty array like:
 	//  '$showFieldItemLinks = array();')
 	$showFieldItemLinks = array("List", "Cite", "Display"); // possible array items: "List", "Cite", "Display"
-	
-	
+
+
 	// Specify the list of fields whose items should be made into clickable search links:
 	// (note that this feature isn't available for all fields from MySQL tables 'refs' and
 	//  'user_data', nor does it make sense for all fields)
@@ -739,9 +739,9 @@
 	// - Generic OpenURL resolver provided by CrossRef: "http://www.crossref.org/openurl"
 	//   (note that the CrossRef.org resolver requires you to register for a free account,
 	//    see the comments for '$crossRefReqDat' below)
-	// 
+	//
 	// - 1Cate, the OpenURL link-server from ISI/Openly: "http://isi.1cate.com/?sid=ISI:WoS"
-	// 
+	//
 	// - WorldCat OpenURL resolver which redirects to "the best" resolver for the client IP address:
 	//   "http://worldcatlibraries.org/registry/gateway"
 

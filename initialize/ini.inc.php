@@ -134,10 +134,10 @@
 	$logoImageURL = "img/logo.png"; // e.g. "img/logo.png"
 
 	// The width of the main logo image (in pixels):
-	$logoImageWidth = "94"; // e.g. "94"
+	$logoImageWidth = "253"; // e.g. "94"
 
 	// The height of the main logo image (in pixels):
-	$logoImageHeight = "94"; // e.g. "94"
+	$logoImageHeight = "56"; // e.g. "94"
 
 
 	// The URL path to a small logo image (which gets used in the OpenSearch description document):

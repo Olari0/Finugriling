@@ -228,7 +228,10 @@
 	<td>&nbsp;</td>
 	<td valign="top"><b><?php echo $loc["DisplayOptions"]; ?>:</b></td>
 	<td valign="middle"><input type="checkbox" id="showLinks" name="showLinks" value="1" checked>&nbsp;&nbsp;&nbsp;<?php echo $loc["ShowLinks"]; ?></td>
-	<td valign="middle"><?php echo $loc["ShowRecordsPerPage_Prefix"]; ?>&nbsp;&nbsp;&nbsp;<input type="text" id="showRows" name="showRows" value="<?php echo $showRows; ?>" size="4" title="<?php echo $loc["DescriptionShowRecordsPerPage"]; ?>">&nbsp;&nbsp;&nbsp;<?php echo $loc["ShowRecordsPerPage_Suffix"]; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="<?php echo $loc["ButtonTitle_Search"]; ?>"></td>
+    <td valign="middle"><?php echo $loc["ShowRecordsPerPage_Prefix"]; ?>
+        <input type="text" id="showRows" name="showRows" value="<?php echo $showRows; ?>" size="4" title="<?php echo $loc["DescriptionShowRecordsPerPage"]; ?>">
+        <?php echo $loc["ShowRecordsPerPage_Suffix"]; ?>
+    </td>
 </tr>
 <tr>
 	<td>&nbsp;</td>
@@ -289,6 +292,9 @@ echo $sortSelector3DropDownItems;
 		<input type="radio" id="sortRadio3B" name="sortRadio3" value="1">&nbsp;&nbsp;&nbsp;<?php echo $loc["descending"]; ?>
 
 	</td>
+</tr>
+<tr>
+    <td colspan="4"><input type="submit" class="button secondary small-12" value="<?php echo $loc["ButtonTitle_Search"]; ?>"></td>
 </tr>
 </table>
 </form><?php

@@ -5727,7 +5727,7 @@
 				$queryParametersArray["showLinks"] = $showLinks;
 
 			$links .= "\n\t\t<a href=\"" . $baseURL . generateURL("show.php", "html", $queryParametersArray, true) . "\"" . $target . ">"
-			        . "<img src=\"" . $baseURL . "img/details.gif\" alt=\"" . $loc["details"] . "\" title=\"" . $loc["LinkTitle_ShowDetails"] . "\" width=\"9\" height=\"17\" hspace=\"0\" border=\"0\"></a>";
+			        . "<i class=\"fa fa-search\"></i></a>";
 
 			// Old code that directly generates a 'search.php' URL which points to Details view for this record:
 //			// Construct the SQL query:
@@ -5762,12 +5762,12 @@
 			        . "?serialNo=" . $row["serial"]
 			        . "&amp;recordAction=edit"
 			        . "\"" . $target . ">"
-			        . "<img src=\"" . $baseURL . "img/edit.gif\" alt=\"" . $loc["edit"] . "\" title=\"" . $loc["LinkTitle_EditRecord"] . "\" width=\"11\" height=\"17\" hspace=\"0\" border=\"0\"></a>";
+			        . "<i class=\"fa fa-pencil\"></i></a>";
 
 		if ((($linkElementCounterLoggedOut > 1) OR (isset($_SESSION['loginEmail']) AND $linkElementCounterLoggedIn > 1)) AND (in_array("edit", $showLinkTypes) AND isset($_SESSION['user_permissions']) AND preg_match("/allow_edit/", $_SESSION['user_permissions'])))
 		{
 			if (in_array("details", $showLinkTypes) AND isset($_SESSION['user_permissions']) AND preg_match("/allow_details_view/", $_SESSION['user_permissions']))
-				$links .= "\n\t\t<br>";
+				$links .= "\n\t\t";
 			else
 				$links .= "&nbsp;&nbsp;";
 		}
@@ -5827,14 +5827,14 @@
 			$encodedURL = str_replace(" ", "%20", $encodedURL); // ensure that any spaces are also properly urlencoded
 
 			if (!empty($isbnURL))
-				$links .= "\n\t\t<a href=\"" . $encodedURL . "\"" . $target . "><img src=\"" . $baseURL . "img/resolve.gif\" alt=\"" . $loc["isbn"] . "\" title=\"" . $loc["LinkTitle_FindBookDetailsViaISBN"] . "\" width=\"11\" height=\"8\" hspace=\"0\" border=\"0\"></a>";
+				$links .= "\n\t\t<a href=\"" . $encodedURL . "\"" . $target . "><i class=\"fa fa-external-link\"></i></a>";
 		}
 
 		// if still no link was generated, we'll provide a link to an OpenURL resolver:
 		elseif (in_array("xref", $showLinkTypes) AND !empty($openURLResolver))
 		{
 			$openURL = openURL($row); // function 'openURL()' is defined in 'openurl.inc.php'
-			$links .= "\n\t\t<a href=\"" . $openURL . "\"" . $target . "><img src=\"" . $baseURL . "img/resolve.gif\" alt=\"" . $loc["openurl"] . "\" title=\"" . $loc["LinkTitle_FindRecordDetailsViaOpenURL"] . "\" width=\"11\" height=\"8\" hspace=\"0\" border=\"0\"></a>";
+			$links .= "\n\t\t<a href=\"" . $openURL . "\"" . " target=\"_blank\"><i class=\"fa fa-external-link\"></i></a>";
 		}
 
 		// insert COinS (ContextObjects in Spans):

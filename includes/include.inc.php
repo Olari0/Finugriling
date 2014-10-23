@@ -5280,8 +5280,9 @@ EOF;
 			if (!$includesSearchPatternDelimiters)
 				$searchString = "/" . $searchString . "/"; // add search pattern delimiters
 
-			if (preg_match($searchString, $sourceString))
-				$sourceString = preg_replace($searchString, $replaceString, $sourceString);
+            if (preg_match($searchString, $sourceString)) {
+                $sourceString = @preg_replace($searchString, $replaceString, $sourceString);
+            }
 		}
 
 		return $sourceString;

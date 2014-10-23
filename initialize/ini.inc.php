@@ -672,7 +672,7 @@
 	// Possible fields: "author", "title", "type", "year", "publication", "abbrev_journal",
 	//                  "keywords", "thesis", "area", "expedition", "notes", "serial", "marked",
 	//                  "selected", "user_keys", "user_notes", "user_groups", "cite_key"
-	$linkedFields = array("author", "year", "publication", "abbrev_journal", "keywords", "area",
+	$linkedFields = array("author", "title", "year", "publication", "abbrev_journal", "keywords", "area",
 	                      "user_keys", "user_notes", "user_groups");
 
 

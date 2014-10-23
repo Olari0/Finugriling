@@ -23,7 +23,7 @@
 	// --------------------------------------------------------------------
 
 	// Inserts the HTML <head>...</head> block as well as the initial <body> tag:
-	// 
+	//
 	// TODO: include OpenSearch elements in HTML header
 	//       (see examples at <http://www.opensearch.org/Specifications/OpenSearch/1.1#Response_metadata_in_HTML.2FXHTML>)
 	function displayHTMLhead($pageTitle, $metaRobots, $metaDescription, $additionalMeta, $includeJavaScript, $includeJavaScriptFile, $viewType, $rssURLArray)
@@ -154,9 +154,10 @@
 
 <table class="pageheader" align="center" border="0" cellpadding="0" cellspacing="10" width="95%" summary="This holds the title logo and info">
 <tr>
-	<td valign="bottom" rowspan="2" align="left" width="<?php echo $logoImageWidth + 26; ?>"><a href="<?php echo $hostInstitutionURL; ?>"><img src="<?php echo $logoImageURL; ?>" border="0" alt="<?php echo encodeHTML($hostInstitutionAbbrevName); ?> Home" title="<?php echo encodeHTML($hostInstitutionName); ?>" width="<?php echo $logoImageWidth; ?>" height="<?php echo $logoImageHeight; ?>"></a></td>
+	<td rowspan="2" align="left" width="<?php echo $logoImageWidth + 26; ?>"><a href="<?php echo $hostInstitutionURL; ?>"><img src="<?php echo $logoImageURL; ?>" border="0" alt="<?php echo encodeHTML($hostInstitutionAbbrevName); ?> Home" title="<?php echo encodeHTML($hostInstitutionName); ?>" width="<?php echo $logoImageWidth; ?>" height="<?php echo $logoImageHeight; ?>"></a></td>
 	<td>
 		<h2><?php echo encodeHTML($officialDatabaseName); ?></h2>
+        <p><?php echo $HeaderString; ?></p>
 		<span class="smallup">
 			<a href="index.php"<?php echo addAccessKey("attribute", "home"); ?> title="<?php echo $loc["LinkTitle_Home"] . addAccessKey("title", "home"); ?>"><?php echo $loc["Home"]; ?></a>&nbsp;|&nbsp;
 			<a href="show.php?records=all"<?php echo addAccessKey("attribute", "show_all"); ?> title="<?php echo $loc["LinkTitle_ShowAll"] . addAccessKey("title", "show_all"); ?>"><?php echo $loc["ShowAll"]; ?></a>&nbsp;|&nbsp;
@@ -186,22 +187,22 @@
 
 		</span>
 	</td>
-	<td class="small" valign="bottom" rowspan="2" align="right">
+	<td class="small" rowspan="2" align="right">
 		<div id="loginInfo">
 			<div id="loginStatus"><?php echo $loginStatus; ?></div>
 			<div id="loginName"><?php echo $loginWelcomeMsg; ?></div>
 			<div id="loginLinks"><?php echo $loginLinks; ?></div>
 		</div>
 		<div id="queryrefs">
-<?php echo buildQuickSearchElements($query, $queryURL, $showQuery, $showLinks, $showRows, $citeStyle, $citeOrder, $displayType); ?>
+            <?php echo buildQuickSearchElements($query, $queryURL, $showQuery, $showLinks, $showRows, $citeStyle, $citeOrder, $displayType); ?>
 		</div>
 	</td>
 </tr>
-<tr>
-	<td><?php echo $HeaderString; ?></td>
-</tr>
+<!--<tr>-->
+<!--	<td>--><?php //echo $HeaderString; ?><!--</td>-->
+<!--</tr>-->
 </table>
-<hr class="pageheader" align="center" width="95%"><?php
+<?php
 	}
 
 	// --------------------------------------------------------------------

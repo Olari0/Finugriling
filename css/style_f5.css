@@ -1,1 +1,7 @@
 /* Customise Foundation5 default styles here */
+
+#queryrefs fieldset {
+    margin: 0;
+}
+
+

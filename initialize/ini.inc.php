@@ -110,7 +110,7 @@
 
 
 	// The path to the default CSS stylesheet which will be used for all page views except print/mobile view:
-	$defaultStyleSheet = "css/style.css"; // e.g. "css/style.css"
+	$defaultStyleSheet = "css/style_f5.css"; // e.g. "css/style.css"
 
 	// The path to the CSS stylesheet which will be used for print view:
 	$printStyleSheet = "css/style_print.css"; // e.g. "css/style_print.css"
@@ -120,7 +120,7 @@
 
 
 	// The default interface language:
-	$defaultLanguage = "en"; // possible values: "en", "de", "fr", "cn", or "ru"
+	$defaultLanguage = "et"; // possible values: "en", "de", "fr", "cn", or "ru"
 
 
 	// The number of records that's returned by default:

@@ -4,4 +4,32 @@
     margin: 0;
 }
 
+h3 {
+    font-size: 1.3rem;
+}
+
+#recentlinks {
+    margin-left: -15px;
+    font-size: 1em;
+}
+
+#recentlinks ul {
+    list-style: none;
+}
+
+table tr:nth-of-type(2n) {
+    background-color: #ffffff;
+}
+
+.citation .moreinfo .reflinks {
+    margin-top: 0.8em;
+}
+
+.citation .moreinfo .reflinks > * {
+    display: inline;
+}
+
+.refbase-credit a {
+    float: right;
+}
 

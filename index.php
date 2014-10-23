@@ -112,7 +112,7 @@
 	// --------------------------------------------------------------------
 ?>
 
-<table align="center" border="0" cellpadding="2" cellspacing="5" width="90%" summary="This table explains features, goals and usage of the <?php echo encodeHTML($officialDatabaseName); ?>">
+<table align="center" border="0" cellpadding="2" cellspacing="5" width="95%" summary="This table explains features, goals and usage of the <?php echo encodeHTML($officialDatabaseName); ?>">
 	<tr>
 		<td colspan="2"><h3><?php echo $loc["RecentChanges"]; ?></h3></td>
 		<td width="<?php echo $rightColumnWidth; ?>" valign="bottom" rowspan="2">
@@ -247,7 +247,7 @@ else
 	}
 ?>
 			<div id="recentlinks">
-				<ul type="circle" class="moveup">
+				<ul>
 					<li><?php echo $loc["added"]; ?>: <a href="show.php?date=<?php echo $CurrentDate; ?>"><?php echo $loc["today"]; ?></a> | <a href="show.php?date=<?php echo $DateYesterday; ?>"><?php echo $loc["yesterday"]; ?></a> | <a href="show.php?date=<?php echo $DateLastWeek; ?>&amp;range=after"><?php echo $loc["last 7 days"]; ?></a><?php if (isset($_SESSION['loginEmail']) AND !empty($lastLoginDate) AND !empty($lastLoginTime)) { ?> | <a href="show.php?date=<?php echo $lastLoginDate; ?>&amp;time=<?php echo $lastLoginTime; ?>&amp;range=equal_or_after"><?php echo $loc["since last login"]; ?></a><?php } ?></li>
 					<li><?php echo $loc["edited"]; ?>: <a href="show.php?date=<?php echo $CurrentDate; ?>&amp;when=edited"><?php echo $loc["today"]; ?></a> | <a href="show.php?date=<?php echo $DateYesterday; ?>&amp;when=edited"><?php echo $loc["yesterday"]; ?></a> | <a href="show.php?date=<?php echo $DateLastWeek; ?>&amp;when=edited&amp;range=after"><?php echo $loc["last 7 days"]; ?></a><?php if (isset($_SESSION['loginEmail']) AND !empty($lastLoginDate) AND !empty($lastLoginTime)) { ?> | <a href="show.php?date=<?php echo $lastLoginDate; ?>&amp;time=<?php echo $lastLoginTime; ?>&amp;when=edited&amp;range=equal_or_after"><?php echo $loc["since last login"]; ?></a><?php } ?></li>
 					<li><?php echo $loc["published in"]; ?>: <a href="show.php?year=<?php echo $CurrentYear; ?>"><?php echo $CurrentYear; ?></a> | <a href="show.php?year=<?php echo ($CurrentYear - 1); ?>"><?php echo ($CurrentYear - 1); ?></a> | <a href="show.php?year=<?php echo ($CurrentYear - 2); ?>"><?php echo ($CurrentYear - 2); ?></a> | <a href="show.php?year=<?php echo ($CurrentYear - 3); ?>"><?php echo ($CurrentYear - 3); ?></a></li>
@@ -431,14 +431,14 @@ else
 			</div>
 		</td>
 	</tr>
-	<tr>
-		<td colspan="3"><h3><?php echo $loc["about"]; ?></h3></td>
-	</tr>
-	<tr>
-		<td width="15">&nbsp;</td>
-		<td><?php echo $loc["ThisDatabaseIsMaintained"]; ?> <a href="<?php echo $hostInstitutionURL; ?>"><?php echo encodeHTML($hostInstitutionName); ?></a> (<?php echo encodeHTML($hostInstitutionAbbrevName); ?>). <?php echo $loc["You are welcome to send"]; ?> <a href="mailto:<?php echo $feedbackEmail; ?>"><?php echo $loc["feedback address"]; ?></a>. <?php echo $loc["refbaseDesc"]; ?></td>
-		<td width="<?php echo $rightColumnWidth; ?>" valign="top" align="center"><a href="http://www.refbase.net/"><img src="img/refbase_credit.gif" alt="powered by refbase" width="142" height="51" hspace="0" border="0"></a></td>
-	</tr>
+<!--	<tr>-->
+<!--		<td colspan="3"><h3>--><?php //echo $loc["about"]; ?><!--</h3></td>-->
+<!--	</tr>-->
+<!--	<tr>-->
+<!--		<td width="15">&nbsp;</td>-->
+<!--		<td>--><?php //echo $loc["ThisDatabaseIsMaintained"]; ?><!-- <a href="--><?php //echo $hostInstitutionURL; ?><!--">--><?php //echo encodeHTML($hostInstitutionName); ?><!--</a> (--><?php //echo encodeHTML($hostInstitutionAbbrevName); ?><!--). --><?php //echo $loc["You are welcome to send"]; ?><!-- <a href="mailto:--><?php //echo $feedbackEmail; ?><!--">--><?php //echo $loc["feedback address"]; ?><!--</a>. --><?php //echo $loc["refbaseDesc"]; ?><!--</td>-->
+<!--		<td width="--><?php //echo $rightColumnWidth; ?><!--" valign="top" align="center"><a href="http://www.refbase.net/"><img src="img/refbase_credit.gif" alt="powered by refbase" width="142" height="51" hspace="0" border="0"></a></td>-->
+<!--	</tr>-->
 </table><?php
 
 	// --------------------------------------------------------------------

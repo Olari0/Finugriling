@@ -458,7 +458,7 @@
 		}
 		else
 		{
-			$htmlData .= "\n<table id=\"citations\" class=\"results\" align=\"center\" border=\"0\" cellpadding=\"7\" cellspacing=\"0\" width=\"95%\" summary=\"This table holds the database results for your query\">"
+			$htmlData .= "\n<table id=\"citations\" class=\"results\" align=\"center\" width=\"100%\" summary=\"This table holds the database results for your query\">"
 			           . $recordData
 			           . "\n</table>";
 		}

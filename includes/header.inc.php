@@ -198,9 +198,6 @@
 		</div>
 	</td>
 </tr>
-<!--<tr>-->
-<!--	<td>--><?php //echo $HeaderString; ?><!--</td>-->
-<!--</tr>-->
 </table>
 <?php
 	}

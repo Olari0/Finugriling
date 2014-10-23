@@ -530,7 +530,7 @@
 		global $loc; // '$loc' is made globally available in 'core.php'
 
 		// Start a TABLE
-		$userResultsFooterRow = "\n<table class=\"resultsfooter\" align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"10\" width=\"90%\" summary=\"This table holds the results footer which offers a form to assign selected users to a group and set their permissions\">";
+		$userResultsFooterRow = "\n<table class=\"resultsfooter\" align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"10\" width=\"95%\" summary=\"This table holds the results footer which offers a form to assign selected users to a group and set their permissions\">";
 
 		$userResultsFooterRow .= "\n<tr>"
 

@@ -54,7 +54,6 @@
 		global $loc; // '$loc' is made globally available in 'core.php'
 ?>
 
-<hr class="pagefooter" align="center" width="95%">
 <table class="pagefooter" align="center" border="0" cellpadding="0" cellspacing="10" width="95%" summary="This table holds the footer">
 <tr>
 	<td class="small" width="105"><a href="index.php"<?php echo addAccessKey("attribute", "home"); ?> title="<?php echo $loc["LinkTitle_Home"] . addAccessKey("title", "home"); ?>"><?php echo $loc["Home"]; ?></a></td>
@@ -118,15 +117,14 @@
 
 		// -------------------------------------------------------
 ?>
-
+        <?php if (!empty($helpResourcesURL)) { ?>
+            &nbsp;|&nbsp;
+            <a href="<?php echo $helpResourcesURL; ?>" title="<?php echo $loc["LinkTitle_Help"]; ?>"><?php echo $loc["Help"]; ?></a>
+        <?php } ?>
 	</td>
-	<td class="small" align="right" width="105"><?php
-
-		if (!empty($helpResourcesURL))
-		{
-?><a href="<?php echo $helpResourcesURL; ?>" title="<?php echo $loc["LinkTitle_Help"]; ?>"><?php echo $loc["Help"]; ?></a><?php
-		}
-?></td>
+    <td class="refbase-credit" align="right" width="15%">
+        <a href="http://www.refbase.net/"><img src="img/refbase_credit.gif" alt="powered by refbase" width="142" height="51" hspace="0" border="0"></a>
+    </td>
 </tr>
 </table><?php
 	}

@@ -146,7 +146,7 @@ if (!isset($_SESSION['loginEmail']))
 								</div>
 							</div>
 							<div id="loginSubmit">
-								<input type="submit" class="button secondary large-12" value="<?php echo $loc["ButtonTitle_Login"]; ?>">
+								<input type="submit" class="button secondary small-12" value="<?php echo $loc["ButtonTitle_Login"]; ?>">
 							</div><?php
 		if ($addNewUsers == "everyone")
 			{
@@ -201,7 +201,7 @@ elseif (isset($_SESSION['loginEmail']) AND (isset($_SESSION['user_permissions'])
 								</select>
 							</div>
 							<div id="groupSubmit">
-								<input type="submit" class="button secondary large-12" value="<?php echo $loc["ButtonTitle_Show"]; ?>"<?php echo $groupSearchDisabled; ?>>
+								<input type="submit" class="button secondary small-12" value="<?php echo $loc["ButtonTitle_Show"]; ?>"<?php echo $groupSearchDisabled; ?>>
 							</div>
 						</fieldset>
 					</form>
@@ -219,7 +219,7 @@ else
 	</tr>
 	<tr>
 		<td width="15">&nbsp;</td>
-		<td>
+		<td valign="top">
 <?php
 	// Get the current year & date in order to include them into query URLs:
 	$CurrentYear = date('Y');
@@ -307,7 +307,7 @@ echo $browseMyRefsDropDownItems;
 
 				</select>
 				<br>
-				<input type="submit" class="button secondary" value="<?php echo $loc["ButtonTitle_Browse"]; ?>">
+				<input type="submit" class="button secondary small-12" value="<?php echo $loc["ButtonTitle_Browse"]; ?>">
 			</form><?php
 	}
 else
@@ -369,10 +369,10 @@ if (isset($_SESSION['loginEmail']) AND (isset($_SESSION['user_permissions']) AND
 							<div id="recallSubmit">
                                 <ul class="stack button-group">
                                     <li>
-                                        <input type="submit" class="button secondary large-12" name="submit" value="<?php echo $loc["ButtonTitle_Go"]; ?>"<?php echo $querySearchDisabled; ?>>
+                                        <input type="submit" class="button secondary small-12" name="submit" value="<?php echo $loc["ButtonTitle_Go"]; ?>"<?php echo $querySearchDisabled; ?>>
                                     </li>
                                     <li>
-                                        <input type="submit" class="button secondary large-12" name="submit" value="<?php echo $loc["ButtonTitle_Edit"]; ?>"<?php echo $querySearchDisabled; ?>>
+                                        <input type="submit" class="button secondary small-12" name="submit" value="<?php echo $loc["ButtonTitle_Edit"]; ?>"<?php echo $querySearchDisabled; ?>>
                                     </li>
                                 </ul>
 							</div>

@@ -1,11 +1,31 @@
 /* Customise Foundation5 default styles here */
+h3 {
+    font-size: 1.3rem;
+}
 
-#queryrefs fieldset {
+table tr:nth-of-type(2n) {
+    background-color: #ffffff;
+}
+
+.refbase-credit a {
+    float: right;
+}
+
+.button {
     margin: 0;
 }
 
-h3 {
-    font-size: 1.3rem;
+ul.pagination {
+    margin-bottom: 0;
+}
+
+table {
+    border-collapse: inherit;
+}
+
+/* Modified refbase default CSS  */
+#queryrefs fieldset {
+    margin: 0;
 }
 
 #recentlinks {
@@ -17,8 +37,29 @@ h3 {
     list-style: none;
 }
 
-table tr:nth-of-type(2n) {
-    background-color: #ffffff;
+.resultviews {
+    display: inline;
+    font-size: 0.85em;
+}
+
+.activeview {
+    display: inline;
+    font-size: 1em;
+}
+
+.leftview {
+    display: inline;
+    font-size: 1em;
+}
+
+.middleview {
+    display: inline;
+    font-size: 1em;
+}
+
+.rightview {
+    display: inline;
+    font-size: 1em;
 }
 
 .citation .moreinfo .reflinks {
@@ -29,11 +70,18 @@ table tr:nth-of-type(2n) {
     display: inline;
 }
 
-.refbase-credit a {
-    float: right;
+div.resultsheader {
+    margin: 1.2em 3.0em 0.9em 3.0em;
 }
 
-.button {
-    margin: 0;
+hr.resultsheader, hr.resultsfooter {
+    width: 93%;
+    background-color: #DEDEDE;
+    height: 1px;
+    border: 0;
+}
+
+div.resultsfooter {
+    margin: 1.2em 3.3em 0.9em 3.3em;
 }
 

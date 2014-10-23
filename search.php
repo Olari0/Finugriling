@@ -981,7 +981,7 @@
 						echo displayResultsHeader("search.php", $formElementsGroup, $formElementsRefine, $formElementsDisplayOptions, $displayType); // function 'displayResultsHeader()' is defined in 'results_header.inc.php'
 
 						//    and insert a divider line (which separates the results header from the browse links & results data below):
-						echo "\n<hr class=\"resultsheader\" align=\"center\" width=\"93%\">";
+						echo "\n";
 					}
 
 
@@ -1212,7 +1212,7 @@
 					{
 						if (isset($_SESSION['user_permissions']) AND ((isset($_SESSION['loginEmail']) AND preg_match("/allow_cite|allow_user_groups|allow_export|allow_batch_export/", $_SESSION['user_permissions'])) OR (!isset($_SESSION['loginEmail']) AND preg_match("/allow_cite|allow_export|allow_batch_export/", $_SESSION['user_permissions'])))) // if the 'user_permissions' session variable does contain any of the following: 'allow_cite' -AND- if logged in, aditionally: 'allow_user_groups', 'allow_export', 'allow_batch_export'...
 							// ...Insert a divider line (which separates the results data from the forms in the footer):
-							echo "\n<hr class=\"resultsfooter\" align=\"center\" width=\"93%\">";
+							echo "\n";
 
 						// Call the 'buildResultsFooter()' function (which does the actual work):
 						$ResultsFooter = buildResultsFooter($showRows, $citeStyle, $citeOrder, $displayType, $headerMsg);
@@ -1374,7 +1374,7 @@
 						echo displayResultsHeader("search.php", $formElementsGroup, $formElementsRefine, $formElementsDisplayOptions, $displayType); // function 'displayResultsHeader()' is defined in 'results_header.inc.php'
 
 						//    and insert a divider line (which separates the results header from the browse links & results data below):
-						echo "\n<hr class=\"resultsheader\" align=\"center\" width=\"93%\">";
+						echo "\n";
 					}
 
 
@@ -1662,7 +1662,7 @@
 							             . "\n\t<td colspan=\"$ColspanFields\">&nbsp;</td>"
 							             . "\n</tr>"
 							             . "\n<tr>"
-							             . "\n\t<td colspan=\"$ColspanFields\"><hr class=\"results\" align=\"left\" width=\"100%\"></td>"
+							             . "\n\t<td colspan=\"$ColspanFields\"></td>"
 							             . "\n</tr>"
 							             . "\n<tr>"
 							             . "\n\t<td colspan=\"$ColspanFields\">&nbsp;</td>"
@@ -1687,7 +1687,7 @@
 					{
 						if (isset($_SESSION['user_permissions']) AND ((isset($_SESSION['loginEmail']) AND preg_match("/allow_cite|allow_user_groups|allow_export|allow_batch_export/", $_SESSION['user_permissions'])) OR (!isset($_SESSION['loginEmail']) AND preg_match("/allow_cite|allow_export|allow_batch_export/", $_SESSION['user_permissions'])))) // if the 'user_permissions' session variable does contain any of the following: 'allow_cite' -AND- if logged in, aditionally: 'allow_user_groups', 'allow_export', 'allow_batch_export'...
 							// ...Insert a divider line (which separates the results data from the forms in the footer):
-							echo "\n<hr class=\"resultsfooter\" align=\"center\" width=\"93%\">";
+							echo "\n";
 
 						// Call the 'buildResultsFooter()' function (which does the actual work):
 						$ResultsFooter = buildResultsFooter($showRows, $citeStyle, $citeOrder, $displayType, $headerMsg);
@@ -2070,7 +2070,7 @@
 			{
 				$resultsFooterDisplayStyle = "block";
 				$resultsFooterToggleImage = "img/open.gif";
-				$resultsFooterInitialToggleText = "";
+				$resultsFooterInitialToggleText = encodeHTML($resultsFooterToggleText);
 			}
 			else
 			{
@@ -2088,8 +2088,7 @@
 
 			$ResultsFooterRow .= "\n<div class=\"showhide\">"
 			                   . "\n\t<a href=\"javascript:" . $toggleVisibilityFunction . "('resultactions','resultsFooterToggleimg','resultsFooterToggletxt','" . rawurlencode($resultsFooterToggleText) . "')\"" . addAccessKey("attribute", "footer") . " title=\"" . $loc["LinkTitle_ToggleVisibility"] . addAccessKey("title", "footer") . "\">"
-			                   . "\n\t\t<img id=\"resultsFooterToggleimg\" class=\"toggleimg\" src=\"" . $resultsFooterToggleImage . "\" alt=\"" . $loc["LinkTitle_ToggleVisibility"] . "\" width=\"9\" height=\"9\" hspace=\"0\" border=\"0\">"
-			                   . "\n\t\t<span id=\"resultsFooterToggletxt\" class=\"toggletxt\">" . $resultsFooterInitialToggleText . "</span>"
+			                   . "\n\t\t<h3><i class=\"fa fa-arrow-down\"></i> ". $resultsFooterInitialToggleText ."</h3>"
 			                   . "\n\t</a>"
 			                   . "\n</div>";
 
@@ -2134,7 +2133,7 @@
 					$ResultsFooterRow .= "\n\t\t\t<option>(no formats available)</option>";
 
 				$ResultsFooterRow .= "\n\t\t</select>"
-				                   . "\n\t\t<input type=\"submit\" name=\"submit\" value=\"Cite\"" . addAccessKey("attribute", "biblio") . " title=\"build a list of references for all chosen records" . addAccessKey("title", "biblio") . "\"$citeStyleDisabled>"
+				                   . "\n\t\t<input type=\"submit\" class=\"button secondary\" name=\"submit\" value=\"Cite\"" . addAccessKey("attribute", "biblio") . " title=\"build a list of references for all chosen records" . addAccessKey("title", "biblio") . "\"$citeStyleDisabled>"
 				                   . "\n\t</fieldset>";
 
 				// Assign the 'selected' param to one of the main non-HTML citation output options (RTF, PDF, LaTeX):
@@ -2192,8 +2191,8 @@
 				                   . "\n\t\t\t<input type=\"text\" id=\"userGroupName\" name=\"userGroupName\" value=\"\" size=\"12\" onfocus=\"toggleRadio('myGroupRadio', 'newGroupRadio', true)\" title=\"$groupSearchTextInputTitle\">"
 				                   . "\n\t\t</div>"
 				                   . "\n\t\t<div id=\"addRemoveGroup\">"
-				                   . "\n\t\t\t<input type=\"submit\" name=\"submit\" value=\"Add\" title=\"add the chosen records to the specified group\">"
-				                   . "\n\t\t\t<input type=\"submit\" name=\"submit\" value=\"Remove\" title=\"remove the chosen records from the specified group\"$groupSearchDisabled>"
+				                   . "\n\t\t\t<input type=\"submit\" class=\"button secondary\" name=\"submit\" value=\"Add\" title=\"add the chosen records to the specified group\">"
+				                   . "\n\t\t\t<input type=\"submit\" class=\"button secondary\" name=\"submit\" value=\"Remove\" title=\"remove the chosen records from the specified group\"$groupSearchDisabled>"
 				                   . "\n\t\t</div>"
 				                   . "\n\t</fieldset>";
 			}
@@ -2222,7 +2221,7 @@
 					$ResultsFooterRow .= "\n\t\t\t<option>(no formats available)</option>";
 
 				$ResultsFooterRow .= "\n\t\t</select>"
-				                   . "\n\t\t<input type=\"submit\" name=\"submit\" value=\"Export\"" . addAccessKey("attribute", "export") . " title=\"export all chosen records" . addAccessKey("title", "export") . "\"$exportFormatDisabled>"
+				                   . "\n\t\t<input type=\"submit\" class=\"button secondary\" name=\"submit\" value=\"Export\"" . addAccessKey("attribute", "export") . " title=\"export all chosen records" . addAccessKey("title", "export") . "\"$exportFormatDisabled>"
 				                   . "\n\t</fieldset>";
 			}
 
@@ -5082,11 +5081,11 @@
 		$sourceText = "_" . $sourceText; // Note: by adding a character at the beginning of '$sourceText' we circumvent a problem with the regex pattern below which will strip everything up to the 2nd serial number/cite key if '$sourceText' starts with '$startDelim'
 		$recordSerialsKeysString = preg_replace("/^.*?(?=$startDelim.+?$endDelim|$)/s", "", $sourceText); // remove any text preceeding the first serial number/cite key
 
-		$recordSerialsKeysString = preg_replace("/$startDelim(.+?)$endDelim.*?(?=$startDelim.+?$endDelim|$)/s", "\\1_#_§_~_", $recordSerialsKeysString); // replace any text between serial numbers/cite keys (or between a serial number/cite key and the end of the text) with "_#_§_~_"; additionally, remove the delimiters enclosing the serial numbers/cite keys
-		// Note: we do a quick'n dirty approach here, by inserting the string "_#_§_~_" as string delimiter between serial numbers/cite keys. Of course, this will only work as long the string "_#_§_~_" doesn't occur within '$sourceText'.
-		$recordSerialsKeysString = preg_replace("/(_#_§_~_)?\n?$/s", "", $recordSerialsKeysString); // remove any trailing chars (like \n or "_#_§_~_") at end of line
+		$recordSerialsKeysString = preg_replace("/$startDelim(.+?)$endDelim.*?(?=$startDelim.+?$endDelim|$)/s", "\\1_#_ï¿½_~_", $recordSerialsKeysString); // replace any text between serial numbers/cite keys (or between a serial number/cite key and the end of the text) with "_#_ï¿½_~_"; additionally, remove the delimiters enclosing the serial numbers/cite keys
+		// Note: we do a quick'n dirty approach here, by inserting the string "_#_ï¿½_~_" as string delimiter between serial numbers/cite keys. Of course, this will only work as long the string "_#_ï¿½_~_" doesn't occur within '$sourceText'.
+		$recordSerialsKeysString = preg_replace("/(_#_ï¿½_~_)?\n?$/s", "", $recordSerialsKeysString); // remove any trailing chars (like \n or "_#_ï¿½_~_") at end of line
 
-		$recordSerialsKeysArray = preg_split("/_#_§_~_/", $recordSerialsKeysString, -1, PREG_SPLIT_NO_EMPTY); // split string containing the serial numbers/cite keys on the string delimiter "_#_§_~_" (the 'PREG_SPLIT_NO_EMPTY' flag causes only non-empty pieces to be returned)
+		$recordSerialsKeysArray = preg_split("/_#_ï¿½_~_/", $recordSerialsKeysString, -1, PREG_SPLIT_NO_EMPTY); // split string containing the serial numbers/cite keys on the string delimiter "_#_ï¿½_~_" (the 'PREG_SPLIT_NO_EMPTY' flag causes only non-empty pieces to be returned)
 		$recordSerialsKeysArray = array_unique($recordSerialsKeysArray); // remove any duplicate serial numbers/cite keys from the list of extracted record identifiers
 
 		$recordSerialsArray = array();

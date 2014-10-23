@@ -37,7 +37,7 @@
 		{
 			$resultsHeaderDisplayStyle = "block";
 			$resultsHeaderToggleImage = "img/open.gif";
-			$resultsHeaderInitialToggleText = "";
+			$resultsHeaderInitialToggleText = encodeHTML($resultsHeaderToggleText);
 		}
 		else
 		{
@@ -55,8 +55,7 @@
 <div class="resultsheader">
 <div class="showhide">
 	<a href="javascript:<?php echo $toggleVisibilityFunction; ?>('resultoptions','resultsHeaderToggleimg','resultsHeaderToggletxt','<?php echo rawurlencode($resultsHeaderToggleText); ?>')"<?php echo addAccessKey("attribute", "header"); ?> title="<?php echo $loc["LinkTitle_ToggleVisibility"] . addAccessKey("title", "header"); ?>">
-		<img id="resultsHeaderToggleimg" class="toggleimg" src="<?php echo $resultsHeaderToggleImage; ?>" alt="<?php echo $loc["LinkTitle_ToggleVisibility"]; ?>" width="9" height="9" hspace="0" border="0">
-		<span id="resultsHeaderToggletxt" class="toggletxt"><?php echo $resultsHeaderInitialToggleText; ?></span>
+        <h3><i class="fa fa-arrow-down"></i> <?php echo $resultsHeaderInitialToggleText; ?></h3>
 	</a>
 </div>
 <div id="resultoptions" style="display: <?php echo $resultsHeaderDisplayStyle; ?>;">

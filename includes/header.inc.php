@@ -58,6 +58,7 @@
 
     <link rel="stylesheet" href="css/foundation/normalize.css" type="text/css" title="CSS Definition">
     <link rel="stylesheet" href="css/foundation/foundation.min.css" type="text/css" title="CSS Definition">
+    <link rel="stylesheet" href="css/font/css/font-awesome.min.css" type="text/css" title="CSS Definition">
     <?php if (preg_match("/^Print$/i", $viewType)) {
         ?>
         <link rel="stylesheet" href="<?php echo $printStyleSheet; ?>" type="text/css" title="CSS Definition">
@@ -153,7 +154,7 @@
 		global $loc; // '$loc' is made globally available in 'core.php'
 ?>
 
-<table class="pageheader" align="center" border="0" cellpadding="0" cellspacing="10" width="95%" summary="This holds the title logo and info">
+<table class="pageheader" align="center" width="95%" summary="This holds the title logo and info">
 <tr>
 	<td rowspan="2" align="left" width="<?php echo $logoImageWidth + 26; ?>"><a href="<?php echo $hostInstitutionURL; ?>"><img src="<?php echo $logoImageURL; ?>" border="0" alt="<?php echo encodeHTML($hostInstitutionAbbrevName); ?> Home" title="<?php echo encodeHTML($hostInstitutionName); ?>" width="<?php echo $logoImageWidth; ?>" height="<?php echo $logoImageHeight; ?>"></a></td>
 	<td>

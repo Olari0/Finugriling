@@ -1677,7 +1677,7 @@
 		if (preg_match("/^Mobile$/i", $viewType))
 			$BrowseLinks .= "\n\t<div class=\"pagenav\">";
 		else
-			$BrowseLinks .= "\n\t<td class=\"pagenav\" align=\"center\" valign=\"bottom\">";
+			$BrowseLinks .= "\n\t<td class=\"pagenav\" align=\"center\" valign=\"bottom\"><ul class=\"pagination\">";
 
 		// a) If there's a page range below the one currently shown,
 		// create a "[xx-xx]" link (linking directly to the previous range of pages):
@@ -1687,7 +1687,7 @@
 
 				$previousRangeLastPage = ($previousRangeFirstPage + $maxPageNo - 1); // calculate the last page of the previous page range
 
-				$BrowseLinks .= "\n\t\t<a href=\"" . $baseURL . $href
+				$BrowseLinks .= "\n\t\t<li><a href=\"" . $baseURL . $href
 				              . "?sqlQuery=" . rawurlencode($query)
 				              . "&amp;submit=" . $displayType
 				              . "&amp;citeStyle=" . rawurlencode($citeStyle)
@@ -1701,13 +1701,13 @@
 				              . "&amp;rowOffset=" . (($pageOffset - $maxPageNo) * $showRows)
 				              . "&amp;client=" . rawurlencode($client)
 				              . "&amp;viewType=" . $viewType
-				              . "\" title=\"" . $loc["LinkTitle_DisplayResultsPage"] . " " . $previousRangeFirstPage . " " . $loc["LinkTitle_DisplayLinksToResultsPages"] . " " . $previousRangeFirstPage . "&#8211;" . $previousRangeLastPage . "\">[" . $previousRangeFirstPage . "&#8211;" . $previousRangeLastPage . "] </a>";
+				              . "\" title=\"" . $loc["LinkTitle_DisplayResultsPage"] . " " . $previousRangeFirstPage . " " . $loc["LinkTitle_DisplayLinksToResultsPages"] . " " . $previousRangeFirstPage . "&#8211;" . $previousRangeLastPage . "\">[" . $previousRangeFirstPage . "&#8211;" . $previousRangeLastPage . "] </a></li>";
 			}
 
 		// b) Are there any previous pages?
 		if ($rowOffset > 0)
 			// Yes, so create a previous link
-			$BrowseLinks .= "\n\t\t<a href=\"" . $baseURL . $href
+			$BrowseLinks .= "\n\t\t<li><a href=\"" . $baseURL . $href
 			              . "?sqlQuery=" . rawurlencode($query)
 			              . "&amp;submit=" . $displayType
 			              . "&amp;citeStyle=" . rawurlencode($citeStyle)
@@ -1721,10 +1721,10 @@
 			              . "&amp;rowOffset=" . $previousOffset
 			              . "&amp;client=" . rawurlencode($client)
 			              . "&amp;viewType=" . $viewType
-			              . "\"" . addAccessKey("attribute", "previous") . " title=\"" . $loc["LinkTitle_DisplayPreviousResultsPage"] . addAccessKey("title", "previous") . "\">&lt;&lt;</a>";
+			              . "\"" . addAccessKey("attribute", "previous") . " title=\"" . $loc["LinkTitle_DisplayPreviousResultsPage"] . addAccessKey("title", "previous") . "\">&lt;&lt;</a></li>";
 		else
 			// No, there is no previous page so don't print a link
-			$BrowseLinks .= "\n\t\t&lt;&lt;";
+			$BrowseLinks .= "\n\t\t<li class=\"arrow unavailable\"><a href=\"\">&laquo;</a></li>";
 
 		// c) Output the page numbers as links:
 		// Count through the number of pages in the results:
@@ -1735,7 +1735,7 @@
 				if ($x < $rowOffset || 
 					$x > ($rowOffset + $showRows - 1))
 					// No, so print out a link
-					$BrowseLinks .= " \n\t\t<a href=\"" . $baseURL . $href
+					$BrowseLinks .= " \n\t\t<li><a href=\"" . $baseURL . $href
 					              . "?sqlQuery=" . rawurlencode($query)
 					              . "&amp;submit=" . $displayType
 					              . "&amp;citeStyle=" . rawurlencode($citeStyle)
@@ -1749,17 +1749,17 @@
 					              . "&amp;rowOffset=" . $x
 					              . "&amp;client=" . rawurlencode($client)
 					              . "&amp;viewType=" . $viewType
-					              . "\" title=\"" . $loc["LinkTitle_DisplayResultsPage"] . " " . $page . "\">" . $page . "</a>";
+					              . "\" title=\"" . $loc["LinkTitle_DisplayResultsPage"] . " " . $page . "\">" . $page . "</a></li>";
 				else
 					// Yes, so don't print a link
-					$BrowseLinks .= " \n\t\t<b>$page</b>"; // current page is set in <b>BOLD</b>
+					$BrowseLinks .= " \n\t\t<li class=\"current\"><a href=\"\">$page</a></li>"; // current page is set in <b>BOLD</b>
 
 		$BrowseLinks .= " ";
 
 		// d) Are there any Next pages?
 		if ($rowsFound > $nextOffset)
 			// Yes, so create a next link
-			$BrowseLinks .= "\n\t\t<a href=\"" . $baseURL . $href
+			$BrowseLinks .= "\n\t\t<li class=\"arrow\"><a href=\"" . $baseURL . $href
 			              . "?sqlQuery=" . rawurlencode($query)
 			              . "&amp;submit=" . $displayType
 			              . "&amp;citeStyle=" . rawurlencode($citeStyle)
@@ -1773,10 +1773,10 @@
 			              . "&amp;rowOffset=" . $nextOffset
 			              . "&amp;client=" . rawurlencode($client)
 			              . "&amp;viewType=" . $viewType
-			              . "\"" . addAccessKey("attribute", "next") . " title=\"" . $loc["LinkTitle_DisplayNextResultsPage"] . addAccessKey("title", "next") . "\">&gt;&gt;</a>";
+			              . "\"" . addAccessKey("attribute", "next") . " title=\"" . $loc["LinkTitle_DisplayNextResultsPage"] . addAccessKey("title", "next") . "\">&raquo;</a></li>";
 		else
 			// No,	there is no next page so don't print a link
-			$BrowseLinks .= "\n\t\t&gt;&gt;";
+			$BrowseLinks .= "\n\t\t<li class=\"arrow unavailable\"><a href=\"\">&raquo;</a></li>";
 
 		// e) If there's a page range above the one currently shown,
 		// create a "[xx-xx]" link (linking directly to the next range of pages):
@@ -1788,7 +1788,7 @@
 				if ($nextRangeLastPage > $lastPage)
 					$nextRangeLastPage = $lastPage; // adjust if this is the last range of pages and if it doesn't go up to the max allowed no of pages
 
-				$BrowseLinks .= "\n\t\t<a href=\"" . $baseURL . $href
+				$BrowseLinks .= "\n\t\t<li><a href=\"" . $baseURL . $href
 				              . "?sqlQuery=" . rawurlencode($query)
 				              . "&amp;submit=" . $displayType
 				              . "&amp;citeStyle=" . rawurlencode($citeStyle)
@@ -1802,13 +1802,13 @@
 				              . "&amp;rowOffset=" . (($pageOffset + $maxPageNo) * $showRows)
 				              . "&amp;client=" . rawurlencode($client)
 				              . "&amp;viewType=" . $viewType
-				              . "\" title=\"" . $loc["LinkTitle_DisplayResultsPage"] . " " . $nextRangeFirstPage . " " . $loc["LinkTitle_DisplayLinksToResultsPages"] . " " . $nextRangeFirstPage . "&#8211;" . $nextRangeLastPage . "\"> [" . $nextRangeFirstPage . "&#8211;" . $nextRangeLastPage . "]</a>";
+				              . "\" title=\"" . $loc["LinkTitle_DisplayResultsPage"] . " " . $nextRangeFirstPage . " " . $loc["LinkTitle_DisplayLinksToResultsPages"] . " " . $nextRangeFirstPage . "&#8211;" . $nextRangeLastPage . "\"> [" . $nextRangeFirstPage . "&#8211;" . $nextRangeLastPage . "]</a></li>";
 			}
 
 		if (preg_match("/^Mobile$/i", $viewType))
 			$BrowseLinks .= "\n\t</div>";
 		else
-			$BrowseLinks .= "\n\t</td>";
+			$BrowseLinks .= "\n\t</ul></td>";
 
 		if (preg_match("/^Mobile$/i", $viewType))
 			$BrowseLinks .= "\n\t<div class=\"viewnav\">";
@@ -2063,7 +2063,7 @@ EOF;
 						<input type="text" id="quickSearchName" name="quickSearchName" size="11"$accessKeyAttribute title="$loc[DescriptionEnterSearchString]$accessKeyTitle">$suggestElements
 					</div>
 					<div id="querySubmit">
-						<input type="submit" class="button secondary large-12" value="$loc[ButtonTitle_Search]" title="$loc[DescriptionSearchDB]">
+						<input type="submit" class="button secondary small-12" value="$loc[ButtonTitle_Search]" title="$loc[DescriptionSearchDB]">
 					</div>
 				</fieldset>
 			</form>
@@ -2132,7 +2132,7 @@ EOF;
 					<label for="refineSearchExclude">$loc[ExcludeMatches]</label>
 				</div>
 				<div id="refineSubmit">
-					<input type="submit" name="submit" value="$loc[ButtonTitle_Search]" title="$loc[DescriptionSearchButtonRefineResultsForm]">
+					<input type="submit" class="button secondary" name="submit" value="$loc[ButtonTitle_Search]" title="$loc[DescriptionSearchButtonRefineResultsForm]">
 				</div>
 			</fieldset>
 		</form>
@@ -2238,7 +2238,7 @@ EOF;
 					</select>
 				</div>
 				<div id="groupSubmit">
-					<input type="submit" value="$loc[ButtonTitle_Show]" title="$groupSearchButtonTitle"$groupSearchDisabled>
+					<input type="submit" class="button secondary" value="$loc[ButtonTitle_Show]" title="$groupSearchButtonTitle"$groupSearchDisabled>
 				</div>
 			</fieldset>
 		</form>
@@ -2373,11 +2373,11 @@ EOF;
 		$displayOptionsForm .= <<<EOF
 
 					<div id="optSubmit">
-						<input type="submit" name="submit" value="$submitValue" title="$submitTitle">
+						<input type="submit" class="button secondary" name="submit" value="$submitValue" title="$submitTitle">
 EOF;
 
 		if (!preg_match("/^(Browse|Cite)$/i", $displayType))
-			$displayOptionsForm .= "\n\t\t\t\t\t\t<input type=\"submit\" name=\"submit\" value=\"" . $loc["ButtonTitle_Hide"] . "\" title=\"$hideButtonTitle\"$hideButtonDisabled>";
+			$displayOptionsForm .= "\n\t\t\t\t\t\t<input type=\"submit\" class=\"button secondary\" name=\"submit\" value=\"" . $loc["ButtonTitle_Hide"] . "\" title=\"$hideButtonTitle\"$hideButtonDisabled>";
 
 		$displayOptionsForm .= <<<EOF
 
@@ -2421,8 +2421,8 @@ EOF;
 		$displayOptionsForm .= <<<EOF
 
 					<div id="optRecsPerPage">
-						<input type="text" id="showRows" name="showRows" value="$showRows" size="4"$accessKeyAttribute title="$showRowsTitle$accessKeyTitle">
 						<label for="showRows">$showRowsLabel</label>
+						<input type="text" id="showRows" name="showRows" value="$showRows" size="4"$accessKeyAttribute title="$showRowsTitle$accessKeyTitle">
 					</div>
 				</div>
 			</fieldset>

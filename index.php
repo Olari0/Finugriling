@@ -112,7 +112,7 @@
 	// --------------------------------------------------------------------
 ?>
 
-<table align="center" border="0" cellpadding="2" cellspacing="5" width="95%" summary="This table explains features, goals and usage of the <?php echo encodeHTML($officialDatabaseName); ?>">
+<table align="center" width="95%" summary="This table explains features, goals and usage of the <?php echo encodeHTML($officialDatabaseName); ?>">
 	<tr>
 		<td colspan="2"><h3><?php echo $loc["RecentChanges"]; ?></h3></td>
 		<td width="<?php echo $rightColumnWidth; ?>" valign="bottom" rowspan="2">
@@ -146,7 +146,7 @@ if (!isset($_SESSION['loginEmail']))
 								</div>
 							</div>
 							<div id="loginSubmit">
-								<input type="submit" value="<?php echo $loc["ButtonTitle_Login"]; ?>">
+								<input type="submit" class="button secondary large-12" value="<?php echo $loc["ButtonTitle_Login"]; ?>">
 							</div><?php
 		if ($addNewUsers == "everyone")
 			{
@@ -201,7 +201,7 @@ elseif (isset($_SESSION['loginEmail']) AND (isset($_SESSION['user_permissions'])
 								</select>
 							</div>
 							<div id="groupSubmit">
-								<input type="submit" value="<?php echo $loc["ButtonTitle_Show"]; ?>"<?php echo $groupSearchDisabled; ?>>
+								<input type="submit" class="button secondary large-12" value="<?php echo $loc["ButtonTitle_Show"]; ?>"<?php echo $groupSearchDisabled; ?>>
 							</div>
 						</fieldset>
 					</form>
@@ -307,7 +307,7 @@ echo $browseMyRefsDropDownItems;
 
 				</select>
 				<br>
-				<input type="submit" value="<?php echo $loc["ButtonTitle_Browse"]; ?>">
+				<input type="submit" class="button secondary" value="<?php echo $loc["ButtonTitle_Browse"]; ?>">
 			</form><?php
 	}
 else
@@ -367,8 +367,14 @@ if (isset($_SESSION['loginEmail']) AND (isset($_SESSION['user_permissions']) AND
 								</select>
 							</div>
 							<div id="recallSubmit">
-								<input type="submit" name="submit" value="<?php echo $loc["ButtonTitle_Go"]; ?>"<?php echo $querySearchDisabled; ?>>
-								<input type="submit" name="submit" value="<?php echo $loc["ButtonTitle_Edit"]; ?>"<?php echo $querySearchDisabled; ?>>
+                                <ul class="stack button-group">
+                                    <li>
+                                        <input type="submit" class="button secondary large-12" name="submit" value="<?php echo $loc["ButtonTitle_Go"]; ?>"<?php echo $querySearchDisabled; ?>>
+                                    </li>
+                                    <li>
+                                        <input type="submit" class="button secondary large-12" name="submit" value="<?php echo $loc["ButtonTitle_Edit"]; ?>"<?php echo $querySearchDisabled; ?>>
+                                    </li>
+                                </ul>
 							</div>
 						</fieldset>
 					</form>

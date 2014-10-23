@@ -2063,7 +2063,7 @@ EOF;
 						<input type="text" id="quickSearchName" name="quickSearchName" size="11"$accessKeyAttribute title="$loc[DescriptionEnterSearchString]$accessKeyTitle">$suggestElements
 					</div>
 					<div id="querySubmit">
-						<input type="submit" value="$loc[ButtonTitle_Search]" title="$loc[DescriptionSearchDB]">
+						<input type="submit" class="button secondary large-12" value="$loc[ButtonTitle_Search]" title="$loc[DescriptionSearchDB]">
 					</div>
 				</fieldset>
 			</form>

@@ -56,6 +56,7 @@
 	<meta http-equiv="content-type" content="text/html; charset=<?php echo $contentTypeCharset; ?>">
 	<meta http-equiv="Content-Style-Type" content="text/css">
 
+    <link rel="stylesheet" href="css/foundation/normalize.css" type="text/css" title="CSS Definition">
     <link rel="stylesheet" href="css/foundation/foundation.min.css" type="text/css" title="CSS Definition">
     <?php if (preg_match("/^Print$/i", $viewType)) {
         ?>

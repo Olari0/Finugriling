@@ -1123,6 +1123,9 @@
 							if (in_array($displayType, $showFieldItemLinks))
 								// Note: function 'linkifyFieldItems()' will also call function 'encodeField()' to HTML
 								//       encode non-ASCII chars and to apply any field-specific search & replace actions
+
+// TODO: link somwhere here
+
 								echo linkifyFieldItems($orig_fieldname, $row[$i], $userID, $fieldSpecificSearchReplaceActionsArray, $encodingExceptionsArray, "/\s*[;]+\s*/", "; ", $showQuery, $showLinks, $showRows, $citeStyle, $citeOrder, $wrapResults, $displayType, $viewType); // function 'linkifyFieldItems()' is defined in 'include.inc.php'
 							else // don't hotlink field items
 								echo encodeField($orig_fieldname, $row[$i], $fieldSpecificSearchReplaceActionsArray, $encodingExceptionsArray); // function 'encodeField()' is defined in 'include.inc.php'

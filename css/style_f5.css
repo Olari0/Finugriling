@@ -85,3 +85,16 @@ div.resultsfooter {
     margin: 1.2em 3.3em 0.9em 3.3em;
 }
 
+.record {
+    text-transform: capitalize;
+}
+
+.record:nth-of-type(2n) {
+    background-color: #f9f9f9;
+}
+
+.record .mainfieldsbg:nth-of-type(2n), .record .userfieldsbg:nth-of-type(2n), .record .otherfieldsbg:nth-of-type(2n) {
+    border-left: 1px solid #f9f9f9;
+    border-right: 1px solid #f9f9f9;
+    font-weight: bold;
+}

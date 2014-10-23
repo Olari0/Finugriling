@@ -1453,7 +1453,7 @@
 							// for all the fields specified (-> all fields to the left):
 							if (preg_match("/^(author|title|year|volume|corporate_author|address|keywords|abstract|publisher|language|series_editor|series_volume|issn|area|notes|location|call_number|marked|user_keys|user_notes|user_groups|created_date|modified_date)$/", $orig_fieldname))
 								{
-									$recordData .= "\n<tr>"; // ...start a new TABLE row
+									$recordData .= "\n<tr class=\"record\">"; // ...start a new TABLE row
 
 									if ((!preg_match("/^(Print|Mobile)$/i", $viewType)) AND (!preg_match("/^cli/i", $client)) AND ($wrapResults != "0")) // Note: we omit the marker column in print/mobile view ('viewType=Print' or 'viewType=Mobile'), for CLI clients, and when outputting only a partial document structure ('wrapResults=0')!
 									{
@@ -1468,18 +1468,18 @@
 							// in that row as a bold link...
 							if (preg_match("/^(author|title|type|year|publication|abbrev_journal|volume|issue|pages|call_number|serial)$/", $orig_fieldname)) // print a colored background (grey, by default)
 								{
-									$HTMLbeforeLink = "\n\t<td valign=\"top\" width=\"75\" class=\"mainfieldsbg\"><b>"; // start the (bold) TD tag
-									$HTMLafterLink = "</b></td>"; // close the (bold) TD tag
+									$HTMLbeforeLink = "\n\t<td valign=\"top\" width=\"75\" class=\"mainfieldsbg\">"; // start the (bold) TD tag
+									$HTMLafterLink = "</td>"; // close the (bold) TD tag
 								}
 							elseif (preg_match("/^(marked|copy|selected|user_keys|user_notes|user_file|user_groups|cite_key)$/", $orig_fieldname)) // print a colored background (light orange, by default) for all the user specific fields
 								{
-									$HTMLbeforeLink = "\n\t<td valign=\"top\" width=\"75\" class=\"userfieldsbg\"><b>"; // start the (bold) TD tag
-									$HTMLafterLink = "</b></td>"; // close the (bold) TD tag
+									$HTMLbeforeLink = "\n\t<td valign=\"top\" width=\"75\" class=\"userfieldsbg\">"; // start the (bold) TD tag
+									$HTMLafterLink = "</td>"; // close the (bold) TD tag
 								}
 							else // no colored background (by default)
 								{
-									$HTMLbeforeLink = "\n\t<td valign=\"top\" width=\"75\" class=\"otherfieldsbg\"><b>"; // start the (bold) TD tag
-									$HTMLafterLink = "</b></td>"; // close the (bold) TD tag
+									$HTMLbeforeLink = "\n\t<td valign=\"top\" width=\"75\" class=\"otherfieldsbg\">"; // start the (bold) TD tag
+									$HTMLafterLink = "</td>"; // close the (bold) TD tag
 								}
 							// call the 'buildFieldNameLinks()' function (defined in 'include.inc.php'), which will return a properly formatted table data tag holding the current field's name
 							// as well as the URL encoded query with the appropriate ORDER clause:
@@ -1516,7 +1516,7 @@
 							if (!empty($row[$i]))
 							{
 								if (preg_match("/^(author|title|year)$/", $orig_fieldname)) // print author, title & year fields in bold
-									$recordData .= "<b>";
+									$recordData .= "";
 
 								// make field items into clickable search links:
 								if (in_array($displayType, $showFieldItemLinks))
@@ -1527,7 +1527,7 @@
 									$recordData .= encodeField($orig_fieldname, $row[$i], $fieldSpecificSearchReplaceActionsArray, $encodingExceptionsArray); // function 'encodeField()' is defined in 'include.inc.php'
 
 								if (preg_match("/^(author|title|year)$/", $orig_fieldname))
-									$recordData .= "</b>";
+									$recordData .= "";
 							}
 
 							$recordData .= "</td>"; // finish the TD tag
@@ -1554,7 +1554,7 @@
 													$linkArray[] = "\n\t\t<a href=\"" . $baseURL . "record.php"
 													             . "?serialNo=" . $row["serial"]
 													             . "&amp;recordAction=edit"
-													             . "\"><img src=\"" . $baseURL . "img/edit.gif\" alt=\"" . $loc["edit"] . "\" title=\"" . $loc["LinkTitle_EditRecord"] . "\" width=\"11\" height=\"17\" hspace=\"0\" border=\"0\"></a>";
+													             . "\"><i class=\"fa fa-search\"></i></a>";
 
 												// show a link to any corresponding FILE if one of the following conditions is met:
 												// - the variable '$fileVisibility' (defined in 'ini.inc.php') is set to 'everyone'
@@ -1623,7 +1623,7 @@
 												if (!empty($openURLResolver))
 												{
 													$openURL = openURL($row); // function 'openURL()' is defined in 'openurl.inc.php'
-													$linkArray[] = "\n\t\t<a href=\"" . $openURL . "\"><img src=\"" . $baseURL . "img/xref.gif\" alt=\"" . $loc["openurl"] . "\" title=\"" . $loc["LinkTitle_FindRecordDetailsViaOpenURL"] . "\" width=\"18\" height=\"20\" hspace=\"0\" border=\"0\"></a>";
+													$linkArray[] = "\n\t\t<a href=\"" . $openURL . "\"><i class=\"fa fa-external-link\"></i></a>";
 												}
 
 												// insert COinS (ContextObjects in Spans):
@@ -1650,7 +1650,7 @@
 						$ColspanFields = ($NoColumns - 1);
 
 					// Print out an URL that links directly to this record:
-					$recordData .= "\n<tr>" // start a new TR (Table Row)
+					$recordData .= "\n<tr class=\"record-link\">" // start a new TR (Table Row)
 					             . "\n\t<td colspan=\"$ColspanFields\" align=\"center\" class=\"smaller\"><a href=\"" . $databaseBaseURL . "show.php?record=" . $row["serial"] . "\" title=\"" . $loc["LinkTitle_Permalink"] . "\">" . $loc["PermalinkLong"] . "</a>"
 					             . "<div class=\"unapi\"><abbr class=\"unapi-id\" title=\"" . $databaseBaseURL . "show.php?record=" . $row["serial"] . "\"></abbr></div></td>" // re <abbr> tag see <http://unapi.info/specs/>
 					             . "\n</tr>";
@@ -1658,13 +1658,13 @@
 					// Append a divider line if it's not the last (or only) record on the page:
 					if ((($rowCounter+1) < $showRows) && (($rowCounter+1) < $rowsFound))
 						if (!(($showMaxRow == $rowsFound) && (($rowCounter+1) == ($showMaxRow-$rowOffset)))) // if we're NOT on the *last* page processing the *last* record... ('$showMaxRow-$rowOffset' gives the number of displayed records for a particular page)
-							$recordData .= "\n<tr>"
+							$recordData .= "\n<tr class=\"colspan\">"
 							             . "\n\t<td colspan=\"$ColspanFields\">&nbsp;</td>"
 							             . "\n</tr>"
-							             . "\n<tr>"
+							             . "\n<tr class=\"colspan\">"
 							             . "\n\t<td colspan=\"$ColspanFields\"></td>"
 							             . "\n</tr>"
-							             . "\n<tr>"
+							             . "\n<tr class=\"colspan\">"
 							             . "\n\t<td colspan=\"$ColspanFields\">&nbsp;</td>"
 							             . "\n</tr>";
 
@@ -2069,13 +2069,11 @@
 			if (isset($displayResultsFooterDefault[$displayType]) AND ($displayResultsFooterDefault[$displayType] == "open"))
 			{
 				$resultsFooterDisplayStyle = "block";
-				$resultsFooterToggleImage = "img/open.gif";
 				$resultsFooterInitialToggleText = encodeHTML($resultsFooterToggleText);
 			}
 			else
 			{
 				$resultsFooterDisplayStyle = "none";
-				$resultsFooterToggleImage = "img/closed.gif";
 				$resultsFooterInitialToggleText = encodeHTML($resultsFooterToggleText);
 			}
 

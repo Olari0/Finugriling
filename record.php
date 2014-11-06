@@ -173,7 +173,7 @@
 
 	if (isset($loginEmail)) // if a user is logged in
 	{
-		// build a correct call number prefix for the currently logged-in user (e.g. 'IPÖ @ msteffens'):
+		// build a correct call number prefix for the currently logged-in user (e.g. 'IPï¿½ @ msteffens'):
 		$callNumberPrefix = getCallNumberPrefix(); // function 'getCallNumberPrefix()' is defined in 'include.inc.php'
 	}
 
@@ -1171,7 +1171,7 @@
 		// preserved, therefore we include them within a hidden form tag:
 		echo "\n<input type=\"hidden\" name=\"callNumberName\" value=\"" . rawurlencode($callNumberName) . "\">"; // ...include the *full* contents of the 'call_number' field
 
-	echo "\n<table align=\"center\" border=\"0\" cellpadding=\"5\" cellspacing=\"0\" width=\"600\" summary=\"This table holds a form that offers to add records or edit existing ones\">"
+	echo "\n<table align=\"center\" border=\"0\" cellpadding=\"5\" cellspacing=\"0\" width=\"95%\" summary=\"This table holds a form that offers to add records or edit existing ones\">"
 			. "\n<tr>"
 			. "\n\t<td width=\"74\" class=\"mainfieldsbg\"><b>". $loc["Author"]."</b></td>"
 			. "\n\t<td colspan=\"4\" class=\"mainfieldsbg\">"
@@ -1630,7 +1630,7 @@
 	}
 
 	// display an ADD/EDIT button:
-	echo "<input type=\"submit\" name=\"submit\" value=\"$addEditButtonTitle\"$addEditButtonLock title=\"$addEditTitle\">";
+	echo "<input type=\"submit\" class=\"button secondary\" name=\"submit\" value=\"$addEditButtonTitle\"$addEditButtonLock title=\"$addEditTitle\">";
 
 	if (isset($_SESSION['user_permissions']) AND preg_match("/allow_delete/", $_SESSION['user_permissions'])) // if the 'user_permissions' session variable contains 'allow_delete'...
 	// ... display a delete button:
@@ -1640,7 +1640,7 @@
 		{
 			if (!isset($loginEmail) OR ((!preg_match("/" . $loginEmail . "/", $locationName) OR preg_match("/;/", $rawLocationName)) AND ($loginEmail != $adminLoginEmail))) // if the user isn't logged in -OR- any normal user is logged in & the 'location' field doesn't list her email address -OR- if the 'location' field contains more than one user (which is indicated by a semicolon character)...
 				// Note that we use '$rawLocationName' instead of the '$locationName' variable for those tests that check for the existence of a semicolon since for '$locationName' high ASCII characters were converted into HTML entities.
-				// E.g., the german umlaut 'ü' would be presented as '&uuml;', thus containing a semicolon character *within* the user's name!
+				// E.g., the german umlaut 'ï¿½' would be presented as '&uuml;', thus containing a semicolon character *within* the user's name!
 			{
 				// build an informative title string:
 				if (!isset($loginEmail)) // if the user isn't logged in
@@ -1666,7 +1666,7 @@
 				$deleteButtonLock = "";
 			}
 	
-			echo "&nbsp;&nbsp;&nbsp;<input type=\"submit\" name=\"submit\" value=\"" . $loc["ButtonTitle_DeleteRecord"] . "\"$deleteButtonLock title=\"$deleteTitle\">";
+			echo "&nbsp;&nbsp;&nbsp;<input type=\"submit\" class=\"button secondary\" name=\"submit\" value=\"" . $loc["ButtonTitle_DeleteRecord"] . "\"$deleteButtonLock title=\"$deleteTitle\">";
 		}
 	}
 

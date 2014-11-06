@@ -98,3 +98,7 @@ div.resultsfooter {
     border-right: 1px solid #f9f9f9;
     font-weight: bold;
 }
+
+select[multiple] {
+    height: 10rem
+}

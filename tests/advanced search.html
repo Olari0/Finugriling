@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://finugriling.talv.eu" />
+<title>keeruline otsing</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">keeruline otsing</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/search.php?formType=simpleSearch&amp;showQuery=0&amp;showAuthor=1&amp;authorSelector=contains&amp;authorName=Tarkka%2C+P.&amp;showTitle=1&amp;titleSelector=contains&amp;titleName=&amp;showYear=1&amp;yearSelector=contains&amp;yearNo=&amp;showPublication=1&amp;publicationRadio=0&amp;publicationSelector2=contains&amp;publicationName2=&amp;showVolume=1&amp;volumeSelector=contains&amp;volumeNo=&amp;showPages=1&amp;pagesSelector=contains&amp;pagesNo=&amp;showLinks=1&amp;showRows=25&amp;sortSelector1=author&amp;sortRadio1=0&amp;sortSelector2=year&amp;sortRadio2=1&amp;sortSelector3=publication&amp;sortRadio3=0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Keerukas otsing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Keerukas otsing</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=authorName</td>
+	<td>Tarkka, P.</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=titleName</td>
+	<td>Salama</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=yearNo</td>
+	<td>1973</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=pagesNo</td>
+	<td>329</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=//form/table/tbody/tr[75]/td/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPageToLoad</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

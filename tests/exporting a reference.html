@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://finugriling.talv.eu/" />
+<title>kirje exportimine</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">kirje exportimine</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/search.php?sqlQuery=SELECT%20author%2C%20title%2C%20type%2C%20year%2C%20publication%2C%20abbrev_journal%2C%20volume%2C%20issue%2C%20pages%2C%20keywords%2C%20abstract%2C%20address%2C%20corporate_author%2C%20thesis%2C%20publisher%2C%20place%2C%20editor%2C%20language%2C%20summary_language%2C%20orig_title%2C%20series_editor%2C%20series_title%2C%20abbrev_series_title%2C%20series_volume%2C%20series_issue%2C%20edition%2C%20issn%2C%20isbn%2C%20medium%2C%20area%2C%20expedition%2C%20conference%2C%20notes%2C%20approved%2C%20location%2C%20call_number%2C%20serial%2C%20marked%2C%20copy%2C%20selected%2C%20user_keys%2C%20user_notes%2C%20user_file%2C%20user_groups%2C%20cite_key%2C%20related%20FROM%20refs%20WHERE%20serial%20%3D%201377%20ORDER%20BY%20author%2C%20year%20DESC%2C%20publication&amp;client=&amp;formType=sqlSearch&amp;submit=Display&amp;viewType=&amp;showQuery=0&amp;showLinks=1&amp;showRows=5&amp;rowOffset=&amp;wrapResults=1&amp;citeOrder=&amp;citeStyle=APA&amp;exportFormat=RIS&amp;exportType=html&amp;exportStylesheet=&amp;citeType=html&amp;headerMsg=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#exportrefs &gt; input[name=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Avaleht</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=i.fa.fa-search</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#exportrefs &gt; input[name=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

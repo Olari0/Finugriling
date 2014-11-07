@@ -6,5 +6,6 @@ php:
 
 addons:
   sauce_connect:
-    username: koppelolari
-    access_key: 753f5387-04ed-4825-ad33-8dcd2b4687ed
+    username: "koppelolari"
+    access_key: "753f5387-04ed-4825-ad33-8dcd2b4687ed"
+    

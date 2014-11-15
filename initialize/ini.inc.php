@@ -131,27 +131,27 @@
 
 	// The URL path to the main logo image that's displayed in the refbase header:
 	// (note that all URL paths must be given relative to the root level of your refbase script directory)
-	$logoImageURL = "img/logo.png"; // e.g. "img/logo.png"
+	$logoImageURL = "img/logo.jpg"; // e.g. "img/logo.png"
 
 	// The width of the main logo image (in pixels):
-	$logoImageWidth = "253"; // e.g. "94"
+	$logoImageWidth = "59"; // e.g. "94"
 
 	// The height of the main logo image (in pixels):
-	$logoImageHeight = "56"; // e.g. "94"
+	$logoImageHeight = "60"; // e.g. "94"
 
 
 	// The URL path to a small logo image (which gets used in the OpenSearch description document):
 	// (when possible, supply a 64x64 image of type ".jpeg" or ".png" with a square aspect ratio)
-	$logoSmallImageURL = "img/logo_small.png"; // e.g. "img/logo_small.png"
+	$logoSmallImageURL = "img/logo_small.jpg"; // e.g. "img/logo_small.png"
 
 	// The width of the small logo image (in pixels):
-	$logoSmallImageWidth = "64"; // e.g. "64"
+	$logoSmallImageWidth = "59"; // e.g. "64"
 
 	// The height of the small logo image (in pixels):
-	$logoSmallImageHeight = "64"; // e.g. "64"
+	$logoSmallImageHeight = "60"; // e.g. "64"
 
 	// The valid MIME type of the small logo image:
-	$logoSmallImageType = "image/png"; // e.g. "image/jpeg" or "image/png"
+	$logoSmallImageType = "image/jpg"; // e.g. "image/jpeg" or "image/png"
 
 
 	// The URL path to a favicon image (which gets used in the OpenSearch description document):

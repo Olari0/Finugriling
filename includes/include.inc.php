@@ -2005,7 +2005,7 @@
 		$accessKeyTitle = addAccessKey("title", "qck_search");
 
 		// extract the first field from the 'WHERE' clause:
-		if (preg_match("/ WHERE [ ()]*(\w+)/i", $query))
+        if (preg_match("/ WHERE [ ()]*(\w+)/i", $query) && stripos($query, 'OR') === false)
 			$firstField = preg_replace("/.+ WHERE [ ()]*(\w+).*/i", "\\1", $query);
 		else
 			$firstField = "";
@@ -2060,7 +2060,7 @@ EOF;
 
 						</select>
 						<label for="quickSearchName">$loc[contains]:</label>
-						<input type="text" id="quickSearchName" name="quickSearchName" size="11"$accessKeyAttribute title="$loc[DescriptionEnterSearchString]$accessKeyTitle">$suggestElements
+						<input type="text" id="quickSearchName" name="quickSearchName" size="11"$accessKeyAttribute title="$loc[DescriptionEnterSearchString]$accessKeyTitle" value="{$_GET['quickSearchName']}">$suggestElements
 					</div>
 					<div id="querySubmit">
 						<input type="submit" class="button secondary small-12" value="$loc[ButtonTitle_Search]" title="$loc[DescriptionSearchDB]">

@@ -845,7 +845,7 @@
 						$queryRefs .= "type = " . quote_smart($recordData['type']) . ", ";
 
 					if (!empty($recordData['thesis']))
-						$queryRefs .= "thesis = " . quote_smart($recordData['thesis']) . ", ";
+                        $queryRefs .= "thesis = " . quote_smart(strlen($recordData['thesis']) > 0 ? 'yes' : 'no') . ", ";
 
 					if (!empty($recordData['notes']))
 						$queryRefs .= "notes = " . quote_smart($recordData['notes']) . ", ";

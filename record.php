@@ -1311,11 +1311,13 @@
 			. "\n\t</td>"
 			. "\n\t<td width=\"74\" class=\"otherfieldsbg\"><b>". $loc["Thesis"]."</b></td>";
 
-	$thesisType = "\n\t<td align=\"right\" class=\"otherfieldsbg\">\n\t\t<select id=\"thesisName\" name=\"thesisName\" title=\"". $loc["DescriptionThesis"]."\">\n\t\t\t<option></option>\n\t\t\t<option value=\"Bachelor's thesis\">" . $loc["Bachelor's thesis"] . "</option>\n\t\t\t<option value=\"Master's thesis\">" . $loc["Master's thesis"] . "</option>\n\t\t\t<option value=\"Ph.D. thesis\">" . $loc["Ph.D. thesis"] . "</option>\n\t\t\t<option value=\"Diploma thesis\">" . $loc["Diploma thesis"] . "</option>\n\t\t\t<option value=\"Doctoral thesis\">" . $loc["Doctoral thesis"] . "</option>\n\t\t\t<option value=\"Habilitation thesis\">" . $loc["Habilitation thesis"] . "</option>\n\t\t</select>\n\t</td>";
-	if (!empty($thesisName))
-		$thesisType = preg_replace("/<option (value=\"" . $thesisName . "\")>/", "<option \\1 selected>", $thesisType);
+$thesisType =
+    "\n\t<td align=\"right\" class=\"otherfieldsbg\">
+        <input type=\"checkbox\" id=\"thesisName\" name=\"thesisName\" title=\"". $loc["DescriptionThesis"]."\" value=\"yes\"/>
+    </td>";
 
 	echo "$thesisType"
+
 			. "\n</tr>"
 			. "\n<tr>"
 			. "\n\t<td width=\"74\" class=\"otherfieldsbg\"><b>". $loc["Publisher"]."</b></td>"

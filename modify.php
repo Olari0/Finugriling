@@ -712,7 +712,7 @@
 	// Get the current date (e.g. '2003-12-31'), time (e.g. '23:59:49') and user name & email address (e.g. 'Matthias Steffens (refbase@extracts.de)'):
 	list ($currentDate, $currentTime, $currentUser) = getCurrentDateTimeUser(); // function 'getCurrentDateTimeUser()' is defined in 'include.inc.php'
 
-	// Build a correct call number prefix for the currently logged-in user (e.g. 'IPÖ @ msteffens'):
+	// Build a correct call number prefix for the currently logged-in user (e.g. 'IPï¿½ @ msteffens'):
 	$callNumberPrefix = getCallNumberPrefix(); // function 'getCallNumberPrefix()' is defined in 'include.inc.php'
 
 
@@ -811,7 +811,7 @@
 			elseif (!preg_match("/$callNumberPrefix/", $callNumberName)) // if the admin's call number prefix does NOT already occur within the contents of the 'call_number' field...
 			{
 				if (preg_match("/; *[^ @;][^@;]*$/", $callNumberName)) // for the admin we offer autocompletion of the call number prefix if he/she just enters his/her reference ID after the last full call number (separated by '; ')
-					// e.g., the string 'IPÖ @ mschmid @ 123; 1778' will be autocompleted to 'IPÖ @ mschmid @ 123; IPÖ @ msteffens @ 1778' (with 'msteffens' being the admin user)
+					// e.g., the string 'IPï¿½ @ mschmid @ 123; 1778' will be autocompleted to 'IPï¿½ @ mschmid @ 123; IPï¿½ @ msteffens @ 1778' (with 'msteffens' being the admin user)
 					$callNumberName = preg_replace("/^(.+); *([^@;]+)$/i", "\\1; $callNumberPrefix @ \\2", $callNumberName); // insert the admin's call number prefix before any reference ID that stand's at the end of the string of call numbers
 				else
 					$callNumberName = $callNumberName . "; " . $callNumberPrefix . " @ "; // ...append the admin's call number prefix to any existing call numbers
@@ -1090,7 +1090,7 @@
 			           . "file = " . quote_smart($fileName) . ", " // for new records the 'file' field will be updated once more after record creation, since the serial number of the newly created record may be required when generating a file name for any uploaded file
 			           . "serial = NULL, " // inserting 'NULL' into an auto_increment PRIMARY KEY attribute allocates the next available key value
 			           . "type = " . quote_smart($typeName) . ", "
-			           . "thesis = " . quote_smart($thesisName) . ", "
+                       . "thesis = " . quote_smart(strlen($thesisName) > 0 ? 'yes' : 'no') . ", "
 			           . "notes = " . quote_smart($notesName) . ", "
 			           . "url = " . quote_smart($urlName) . ", "
 			           . "doi = " . quote_smart($doiName) . ", "

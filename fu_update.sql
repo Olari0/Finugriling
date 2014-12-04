@@ -1,0 +1,1 @@
+ALTER TABLE `refs` CHANGE `thesis` `thesis` enum('no','yes') NULL DEFAULT 'no' AFTER `TYPE`, COMMENT='';

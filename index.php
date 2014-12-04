@@ -120,6 +120,7 @@
 if (!isset($_SESSION['loginEmail']))
 	{
 ?>
+		<?php /*	
 			<div id="userlogin" class="box">
 				<div class="boxHead">
 					<h3><?php echo $loc["Login"]; ?>:</h3>
@@ -161,7 +162,9 @@ if (!isset($_SESSION['loginEmail']))
 						</fieldset>
 					</form>
 				</div>
-			</div><?php
+			</div>
+			*/ ?>
+			<?php
 	}
 elseif (isset($_SESSION['loginEmail']) AND (isset($_SESSION['user_permissions']) AND preg_match("/allow_user_groups/", $_SESSION['user_permissions']))) // if a user is logged in AND the 'user_permissions' session variable contains 'allow_user_groups', show the 'Show My Groups' form:
 	{

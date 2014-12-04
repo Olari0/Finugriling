@@ -2899,23 +2899,24 @@
 			}
 
 			// standardize contents of the 'author', 'editor' and 'series_editor' fields:
-			if (!empty($fieldParametersArray['author']) OR !empty($fieldParametersArray['editor']) OR !empty($fieldParametersArray['series_editor']))
-			{
-				$namesArray = array();
-
-				if (!empty($fieldParametersArray['author']))
-					$namesArray['author'] = $fieldParametersArray['author'];
-
-				if (!empty($fieldParametersArray['editor']))
-					$namesArray['editor'] = $fieldParametersArray['editor'];
-
-				if (!empty($fieldParametersArray['series_editor']))
-					$namesArray['series_editor'] = $fieldParametersArray['series_editor'];
-
-				if (!empty($namesArray))
-					foreach ($namesArray as $nameKey => $nameString)
-						$fieldParametersArray[$nameKey] = standardizePersonNames($nameString, $familyNameFirst, $personDelimiter, $familyNameGivenNameDelimiter, $shortenGivenNames);
-			}
+            // disabled this for UT
+//			if (!empty($fieldParametersArray['author']) OR !empty($fieldParametersArray['editor']) OR !empty($fieldParametersArray['series_editor']))
+//			{
+//				$namesArray = array();
+//
+//				if (!empty($fieldParametersArray['author']))
+//					$namesArray['author'] = $fieldParametersArray['author'];
+//
+//				if (!empty($fieldParametersArray['editor']))
+//					$namesArray['editor'] = $fieldParametersArray['editor'];
+//
+//				if (!empty($fieldParametersArray['series_editor']))
+//					$namesArray['series_editor'] = $fieldParametersArray['series_editor'];
+//
+//				if (!empty($namesArray))
+//					foreach ($namesArray as $nameKey => $nameString)
+//						$fieldParametersArray[$nameKey] = standardizePersonNames($nameString, $familyNameFirst, $personDelimiter, $familyNameGivenNameDelimiter, $shortenGivenNames);
+//			}
 
 			// if the 'author' field is empty BUT the 'editor' field is not empty AND the record type is either a container item or a self-contained/independent item (such as 'Book Whole', 'Journal', 'Manuscript' or 'Map'):
 			if (empty($fieldParametersArray['author']) AND !empty($fieldParametersArray['editor']) AND preg_match("/^(Book Whole|Conference Volume|Journal|Manual|Manuscript|Map|Miscellaneous|Patent|Report|Software)$/", $fieldParametersArray['type']))

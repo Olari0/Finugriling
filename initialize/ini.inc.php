@@ -821,4 +821,8 @@
 	// documentation, tutorials, books and regex-aware applications. Alternatively, you're welcome to
 	// post a message to the refbase help forum: <http://sourceforge.net/forum/forum.php?forum_id=218758>
 
+
+# increase max memory
+ini_set('memory_limit', '512M');
+set_time_limit(600); // 10 min
 ?>

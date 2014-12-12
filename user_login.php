@@ -282,32 +282,62 @@
 ?>
 
 <form method="POST" action="user_login.php?referer=<?php echo rawurlencode($referer); ?>">
-<table align="center" border="0" cellpadding="2" cellspacing="5" width="95%" summary="This table holds a login form for the <?php echo encodeHTML($officialDatabaseName); ?>">
-	<tr>
-		<td width="174" valign="bottom">
-			<b><?php echo $loc["EmailAddress"]; ?>:</b>
-		</td>
-		<td valign="bottom">
-			<input type="text" name="loginEmail" size="30">
-		</td>
-	</tr>
-	<tr>
-		<td valign="bottom">
-			<b><?php echo $loc["EmailAdressPassword"]; ?>:</b>
-		</td>
-		<td valign="bottom">
-			<input type="password" name="loginPassword" size="30">
-		</td>
-	</tr>
-	<tr>
-		<td valign="bottom">
-			&nbsp;
-		</td>
-		<td valign="bottom">
-			<input type="submit" value="Login">
-		</td>
-	</tr>
-</table>
+        <div class="row">
+            <div class="small-12 column">
+                <div class="row">
+                    <div class="small-2 columns">
+                        <label for=""><?php echo $loc["EmailAddress"]; ?>:</label>
+                    </div>
+                    <div class="small-10 columns">
+                        <input type="text" name="loginEmail" size="30">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 column">
+                <div class="row">
+                    <div class="small-2 columns">
+                        <label for=""><?php echo $loc["EmailAdressPassword"]; ?>:</label>
+                    </div>
+                    <div class="small-10 columns">
+                        <input type="password" name="loginPassword" size="30">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 column">
+                <input class="button secondary right" style="margin-bottom: 15px" type="submit" value="Login">
+            </div>
+        </div>
+
+<!--<table align="center" border="0" cellpadding="2" cellspacing="5" width="95%" summary="This table holds a login form for the --><?php //echo encodeHTML($officialDatabaseName); ?><!--">-->
+<!--	<tr>-->
+<!--		<td width="174" valign="bottom">-->
+<!--			<b>--><?php //echo $loc["EmailAddress"]; ?><!--:</b>-->
+<!--		</td>-->
+<!--		<td valign="bottom">-->
+<!--			<input type="text" name="loginEmail" size="30">-->
+<!--		</td>-->
+<!--	</tr>-->
+<!--	<tr>-->
+<!--		<td valign="bottom">-->
+<!--			<b>--><?php //echo $loc["EmailAdressPassword"]; ?><!--:</b>-->
+<!--		</td>-->
+<!--		<td valign="bottom">-->
+<!--			<input type="password" name="loginPassword" size="30">-->
+<!--		</td>-->
+<!--	</tr>-->
+<!--	<tr>-->
+<!--		<td valign="bottom">-->
+<!--			&nbsp;-->
+<!--		</td>-->
+<!--		<td valign="bottom">-->
+<!--			<input class="button secondary" type="submit" value="Login">-->
+<!--		</td>-->
+<!--	</tr>-->
+<!--</table>-->
 </form><?php
 
 		// --------------------------------------------------------------------

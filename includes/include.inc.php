@@ -587,7 +587,7 @@
 
 				$loginWelcomeMsg = "";
 
-				$loginLinks = "<a class=\"right\" href=\"user_login.php?referer=" . rawurlencode($referer) . "\"" . addAccessKey("attribute", "login") . " title=\"" . $loc["LinkTitle_Login"] . addAccessKey("title", "login") . "\">" . $loc["Login"] . "</a>";
+				$loginLinks = "<a href=\"user_login.php?referer=" . rawurlencode($referer) . "\"" . addAccessKey("attribute", "login") . " title=\"" . $loc["LinkTitle_Login"] . addAccessKey("title", "login") . "\">" . $loc["Login"] . "</a>";
 			}
 
 		// Although the '$referer' variable gets included as GET parameter above, we'll also save the variable as session variable:

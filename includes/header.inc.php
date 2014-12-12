@@ -190,10 +190,11 @@
 		</span>
 	</td>
 	<td class="small" rowspan="2" align="right">
-		<div id="loginInfo">
-			<div id="loginStatus"><?php echo $loginStatus; ?></div>
-			<div id="loginName"><?php echo $loginWelcomeMsg; ?></div>
-			<div id="loginLinks">
+		<div id="loginInfo" style="text-align: right">
+            <div id="loginStatus" style="margin: 5px 0">
+                <?php echo $loginStatus; ?> <?php echo $loginWelcomeMsg ? ' - ' . $loginWelcomeMsg : ''; ?>
+            </div>
+			<div id="loginLinks" style="margin: 5px 0">
                 <?php echo $loginLinks; ?>
             </div>
 		</div>

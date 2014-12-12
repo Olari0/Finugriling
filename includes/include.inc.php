@@ -587,7 +587,7 @@
 
 				$loginWelcomeMsg = "";
 
-				$loginLinks = "<a href=\"user_login.php?referer=" . rawurlencode($referer) . "\"" . addAccessKey("attribute", "login") . " title=\"" . $loc["LinkTitle_Login"] . addAccessKey("title", "login") . "\">" . $loc["Login"] . "</a>";
+				$loginLinks = "<a class=\"right\" href=\"user_login.php?referer=" . rawurlencode($referer) . "\"" . addAccessKey("attribute", "login") . " title=\"" . $loc["LinkTitle_Login"] . addAccessKey("title", "login") . "\">" . $loc["Login"] . "</a>";
 			}
 
 		// Although the '$referer' variable gets included as GET parameter above, we'll also save the variable as session variable:
@@ -2030,7 +2030,8 @@
 					<input type="hidden" name="client" value="$encodedClient">
 					<input type="hidden" name="citeStyle" value="$encodedCiteStyle">
 					<input type="hidden" name="citeOrder" value="$citeOrder">
-					<div id="queryField">
+					<div id="queryField" class="row">
+					    <div class="small-6 columns">
 						<label for="quickSearchSelector">$loc[Field]:</label>
 						<select id="quickSearchSelector" name="quickSearchSelector" title="$loc[DescriptionSelectFieldQuickSearchForm]">
 EOF;
@@ -2059,11 +2060,16 @@ EOF;
 		$quickSearchForm .= <<<EOF
 
 						</select>
+						</div>
+						<div class="small-6 columns">
 						<label for="quickSearchName">$loc[contains]:</label>
 						<input type="text" id="quickSearchName" name="quickSearchName" size="11"$accessKeyAttribute title="$loc[DescriptionEnterSearchString]$accessKeyTitle" value="{$_GET['quickSearchName']}">$suggestElements
+					    </div>
 					</div>
-					<div id="querySubmit">
+					<div id="querySubmit" class="row">
+					<div class="small-12 column">
 						<input type="submit" class="button secondary small-12" value="$loc[ButtonTitle_Search]" title="$loc[DescriptionSearchDB]">
+					</div>
 					</div>
 				</fieldset>
 			</form>

@@ -112,6 +112,11 @@
 	{
 		global $sessionTempDir; // defined in 'ini.inc.php'
 
+        // add slash
+        if (substr($bibutilsPath, -1, 1) != DIRECTORY_SEPARATOR) {
+            $bibutilsPath .= DIRECTORY_SEPARATOR;
+        }
+
 		$outputFile = tempnam($sessionTempDir, "refbase-");
 		$cmd = $bibutilsPath . $program . $inputEncodingArg . $outputEncodingArg . " " . $tempFile;
 		execute($cmd, $outputFile);

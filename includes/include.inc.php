@@ -4319,7 +4319,7 @@ EOF;
 		if (empty($userID))
 			// Find all unique language entries in the 'languages' table that are enabled:
 			// (language names should be unique anyhow, so the DISTINCT parameter wouldn't be really necessary)
-			$query = "SELECT DISTINCT language_name FROM $tableLanguages WHERE language_enabled = 'true' ORDER BY order_by";
+			$query = "SELECT DISTINCT language_id, language_name FROM $tableLanguages WHERE language_enabled = 'true' ORDER BY order_by";
 		else
 			// Get the preferred language for the user with the user ID given in '$userID':
 			$query = "SELECT language AS language_name FROM $tableUsers WHERE user_id = " . quote_smart($userID);
@@ -4333,7 +4333,13 @@ EOF;
 		if ($rowsFound > 0) // If there were rows found ...
 		{
 			while ($row = @ mysql_fetch_array($result)) // for all rows found
-				$languagesArray[] = $row["language_name"]; // append this row's language name to the array of found languages
+			{
+				if (isset($row['language_id'])) {
+					$languagesArray[$row['language_id']] = $row["language_name"]; // append this row's language name to the array of found languages
+				} else {
+					$languagesArray[] = $row["language_name"];
+				}
+			}
 		}
 
 		return $languagesArray;
@@ -4353,9 +4359,12 @@ EOF;
 			// get the preferred language for the current user:
 			$userLanguagesArray = getLanguages($loginUserID);
 			$userLanguage = $userLanguagesArray[0];
-		}
-		else // NO user logged in
-			$userLanguage = $defaultLanguage; // use the default language
+		} elseif (!empty($_SESSION['userLanguage'])) {
+			$userLanguage = $_SESSION['userLanguage']; // use the default language
+		} else // NO user logged in
+		{
+			$userLanguage = $defaultLanguage;
+		} // use the default language
 
 		return $userLanguage;
 	}

@@ -197,6 +197,36 @@
 			<div id="loginLinks" style="margin: 5px 0">
                 <?php echo $loginLinks; ?>
             </div>
+            <?php if (!isset($_SESSION['loginEmail'])):
+                // Display Options:
+
+                // Get all languages that were setup and enabled by the admin:
+                $languagesArray = getLanguages(""); // function 'getLanguages()' is defined in 'include.inc.php'
+
+
+                $languageOptionTags = buildSelectMenuOptions(
+                    $languagesArray,
+                    "/ *; */",
+                    "\t\t\t",
+                    true
+                ); // build properly formatted <option> tag elements from language items returned by function 'getLanguages()'
+                ?>
+                <div id="language" style="margin: 5px 0">
+                    <form action="select_language.php" method="post">
+                        <div class="row collapse">
+                            <div class="small-10 columns">
+                                <select name="language_id">
+                                    <option value="">-- Language --</option>
+                                    <?php echo $languageOptionTags; ?>
+                                </select>
+                            </div>
+                            <div class="small-2 columns">
+                                <button type="submit" class="button secondary tiny">Select</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            <?php endif;?>
 		</div>
 		<div id="queryrefs">
             <?php echo buildQuickSearchElements($query, $queryURL, $showQuery, $showLinks, $showRows, $citeStyle, $citeOrder, $displayType); ?>

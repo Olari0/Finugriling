@@ -980,6 +980,20 @@
 		// This array matches RIS tags with their corresponding refbase fields:
 		// (fields that are unsupported in either RIS or refbase are commented out)
 		// 								"RIS tag" => "refbase field" // RIS tag name (comment)
+
+		/**
+		 * Bibliography of Finno-Ugric Linguistics specific
+		 *
+		 * by Tormi Talv
+		 */
+		$tagsToRefbaseTypeMap = array(
+			'URBIS' => array(
+				'CHAP' => array(
+					//"TI" => "author",
+				)
+			)
+		);
+
 		$tagsToRefbaseFieldsArray = array(
 											"TY"  =>  "type", // Type of reference (IMPORTANT: the array element that maps to 'type' must be listed as the first element!)
 
@@ -1011,7 +1025,7 @@
 											"JA"  =>  "abbrev_journal", // Periodical name: standard abbreviation
 											"J1"  =>  "abbrev_journal", // Periodical name: user abbreviation 1
 											"J2"  =>  "abbrev_journal", // Periodical name: user abbreviation 2
-											"T2"  =>  array("JOUR" => "abbrev_journal", "Other" => "abbrev_series_title"), // Title Secondary (note that "T2" is used by bibutils (instead of "JA") for abbreviated journal names and abbreviated series titles)
+											"T2"  =>  "publication",
 											"T3"  =>  "series_title", // Title Series (in case of "TY=CONF", "T3" appears to be used for conference title)
 
 											"VL"  =>  "volume", // Volume number
@@ -1169,7 +1183,24 @@
 		list($errors, $importRecordNumbersRecognizedFormatArray, $importRecordNumbersNotRecognizedFormatArray) = validateRecords($recordArray, $requiredTagsArray, $importRecordsRadio, $importRecordNumbersArray, $errors);
 
 		// Parse all records that shall be imported:
-		list($parsedRecordsArray, $recordsCount) = parseRecords($recordArray, "RIS", $importRecordNumbersRecognizedFormatArray, $tagsToRefbaseFieldsArray, $tagsMultipleArray, $referenceTypesToRefbaseTypesArray, $fieldDelimiter, $dataDelimiter, $personDelimiter, $familyNameGivenNameDelimiter, $familyNameFirst, $shortenGivenNames, $transformCase, $postprocessorActionsArray, $preprocessorActionsArray);
+		list($parsedRecordsArray, $recordsCount) = parseRecordsBFUL(
+			$recordArray,
+			"RIS",
+			$importRecordNumbersRecognizedFormatArray,
+			$tagsToRefbaseFieldsArray,
+			$tagsMultipleArray,
+			$referenceTypesToRefbaseTypesArray,
+			$fieldDelimiter,
+			$dataDelimiter,
+			$personDelimiter,
+			$familyNameGivenNameDelimiter,
+			$familyNameFirst,
+			$shortenGivenNames,
+			$transformCase,
+			$postprocessorActionsArray,
+			$preprocessorActionsArray,
+			$tagsToRefbaseTypeMap
+		);
 
 		// Build refbase import array:
 		$importDataArray = buildImportArray("refbase", // 'type' - the array format of the 'records' element
@@ -2791,6 +2822,247 @@
 				// standardize field data contained in '$fieldParametersArray':
 				// (function 'standardizeFieldData()' e.g. performs case transformation, standardizes thesis names, normalizes page ranges, and reformats person names according to preference)
 				$fieldParametersArray = standardizeFieldData($fieldParametersArray, $recordFormat, $personDelimiter, $familyNameGivenNameDelimiter, $familyNameFirst, $shortenGivenNames, $transformCase, $postprocessorActionsArray);
+
+				// append the array of extracted field data to the main data array which holds all records to import:
+				$parsedRecordsArray[] = $fieldParametersArray;
+			}
+		}
+		// (END LOOP OVER EACH RECORD)
+
+		return array($parsedRecordsArray, $recordsCount);
+	}
+
+	/**
+	 * Modified version of original parseRecords() for Bibliography of Finno-Ugric Linguistics.
+	 *
+	 * @param $recordArray
+	 * @param $recordFormat
+	 * @param $importRecordNumbersRecognizedFormatArray
+	 * @param $tagsToRefbaseFieldsArray
+	 * @param $tagsMultipleArray
+	 * @param $referenceTypesToRefbaseTypesArray
+	 * @param $fieldDelimiter
+	 * @param $dataDelimiter
+	 * @param $personDelimiter
+	 * @param $familyNameGivenNameDelimiter
+	 * @param $familyNameFirst
+	 * @param $shortenGivenNames
+	 * @param $transformCase
+	 * @param $postprocessorActionsArray
+	 * @param $preprocessorActionsArray
+	 * @param $tagsToRefbaseTypeMap
+	 * @return array
+	 */
+	function parseRecordsBFUL(
+		&$recordArray,
+		$recordFormat,
+		$importRecordNumbersRecognizedFormatArray,
+		$tagsToRefbaseFieldsArray,
+		$tagsMultipleArray,
+		$referenceTypesToRefbaseTypesArray,
+		$fieldDelimiter,
+		$dataDelimiter,
+		$personDelimiter,
+		$familyNameGivenNameDelimiter,
+		$familyNameFirst,
+		$shortenGivenNames,
+		$transformCase,
+		$postprocessorActionsArray,
+		$preprocessorActionsArray,
+		$tagsToRefbaseTypeMap
+	) {
+		global $alnum, $alpha, $cntrl, $dash, $digit, $graph, $lower, $print, $punct, $space, $upper, $word, $patternModifiers; // defined in 'transtab_unicode_charset.inc.php' and 'transtab_latin1_charset.inc.php'
+
+		global $showSource;
+
+		$parsedRecordsArray = array(); // initialize array variable which will hold parsed data of all records that shall be imported
+		$tagsToRefbaseFieldsArrayOriginal = $tagsToRefbaseFieldsArray;
+
+		$recordsCount = count($recordArray); // count how many records are available
+
+		// LOOP OVER EACH RECORD:
+		for ($i = 0; $i < $recordsCount; $i++) // for each record...
+		{
+			// restore original fieldarray
+			$tagsToRefbaseFieldsArray = $tagsToRefbaseFieldsArrayOriginal;
+
+			$TY_buf = null;
+			$source_buf = null;
+
+			// if we're NOT supposed to import this record (because it was either not selected by the user -OR- because it did contain an unrecognized data format)
+			if (!in_array(($i + 1), $importRecordNumbersRecognizedFormatArray)) // '$i' starts with 0 so we have to add 1 to point to the correct record number
+			{
+				continue; // process next record (if any)
+			} else // ...import the current record:
+			{
+				// PRE-PROCESS FIELD DATA:
+				// apply search & replace 'actions' to each record's raw source data:
+				foreach ($preprocessorActionsArray as $thisMatchActionsArray) {
+					if (preg_match($thisMatchActionsArray['match'], $recordArray[$i])) {
+						$recordArray[$i] = searchReplaceText($thisMatchActionsArray['actions'], $recordArray[$i], true);
+					}
+				} // function 'searchReplaceText()' is defined in 'include.inc.php'
+
+				// split each record into its fields:
+				$fieldArray = preg_split("/" . $fieldDelimiter . "/", $recordArray[$i]);
+
+				// initialize some variables:
+				$fieldParametersArray = array(); // setup an empty array (it will hold all fields that were extracted for a given record)
+				$tagContentsMultipleArray = array(); // this array will hold individual items of tags that can occur multiple times
+
+
+				// LOOP OVER EACH FIELD:
+				foreach ($fieldArray as &$singleField) // for each field within the current record...
+				{
+					// split each field into its tag and its field data:
+					list($fieldLabel, $fieldData) = preg_split("/" . $dataDelimiter . "/", $singleField);
+
+					// Bibliography of Finno-Ugric Linguistics hack
+					if ($fieldLabel == 'TY') {
+						$TY_buf = strtoupper($fieldData);
+					}
+					if ($fieldLabel == 'ID') {
+						preg_match('/(\w+)_\d+/i', $fieldData, $bful_id_result);
+						if (isset($bful_id_result[1])) {
+							$source_buf = strtoupper($bful_id_result[1]);
+						}
+					}
+
+					if ($TY_buf !== null && $source_buf !== null) {
+						if (isset($tagsToRefbaseTypeMap[$source_buf][$TY_buf])) {
+							$tagsToRefbaseFieldsArray = array_merge($tagsToRefbaseFieldsArray, $tagsToRefbaseTypeMap[$source_buf][$TY_buf]);
+						}
+					}
+
+					if (isset($tagsToRefbaseFieldsArray[$fieldLabel])) // if the current tag is one we'd like to import
+					{
+						$fieldData = preg_replace("/\s{2,}/", " ", $fieldData); // remove any hard returns and extra spaces within the data string
+						$fieldData = trim($fieldData); // remove any preceeding and trailing whitespace from the field data
+
+						// if all of the field data is in uppercase letters, we attempt to convert the string to something more readable:
+						// NOTE: while case transformation is also done in function 'standardizeFieldData()', we cannot omit it here
+						//       since tags that can occur multiple times must be treated individually (i.e. before merging them)
+						if ($transformCase AND ($tagsToRefbaseFieldsArray[$fieldLabel] != "type")) // we exclude reference types from any case transformations
+							// TODO: we should probably only use Unicode-aware expressions here (i.e. something like "/^([$upper$digit]|[^$word])+$/$patternModifiers")
+						{
+							if (preg_match("/^[$upper\W\d]+$/$patternModifiers", $fieldData))
+								// convert upper case to title case (converts e.g. "ELSEVIER SCIENCE BV" into "Elsevier Science Bv"):
+								// (note that this case transformation won't do the right thing for author initials and abbreviations,
+								//  but the result is better than the whole string being upper case, IMHO)
+							{
+								$fieldData = changeCase('title', $fieldData);
+							}
+						} // function 'changeCase()' is defined in 'include.inc.php'
+
+						// extract individual items of tags that can occur multiple times:
+						foreach ($tagsMultipleArray as $tagMultiple) {
+							if (preg_match("/^" . $tagMultiple . "$/i", $fieldLabel)) {
+								if (!is_array($tagsToRefbaseFieldsArray[$fieldLabel])) {
+									$tagContentsMultipleArray[$tagsToRefbaseFieldsArray[$fieldLabel]][] = $fieldData;
+								} else // if the current tag's value in '$tagsToRefbaseFieldsArray' is an array...
+								{
+									// ...we'll copy field data to different refbase fields depending on the current records reference type:
+									// NOTE: this will only work if the array element that maps to 'type' has been already parsed,
+									//       which is why '$tagsToRefbaseFieldsArray' should contain this as the first element!
+									$useDefault = true;
+
+									foreach ($tagsToRefbaseFieldsArray[$fieldLabel] as $referenceType => $refbaseField) {
+										if ($fieldParametersArray['type'] == $referenceType) {
+											$tagContentsMultipleArray[$refbaseField][] = $fieldData;
+											$useDefault = false;
+											break;
+										}
+									}
+
+									if ($useDefault AND isset($tagsToRefbaseFieldsArray[$fieldLabel]['Other'])) {
+										$tagContentsMultipleArray[$tagsToRefbaseFieldsArray[$fieldLabel]['Other']][] = $fieldData;
+									}
+								}
+							}
+						}
+
+						// copy field data to array of field parameters (using the corresponding refbase field name as element key):
+						if (!is_array($tagsToRefbaseFieldsArray[$fieldLabel])) {
+							$fieldParametersArray[$tagsToRefbaseFieldsArray[$fieldLabel]] = $fieldData;
+						} else // if the current tag's value in '$tagsToRefbaseFieldsArray' is an array...
+						{
+							// ...we'll copy field data to different refbase fields depending on the current records reference type:
+							// (see also above note about '$tagsToRefbaseFieldsArray' requiring 'type' as the first element)
+							$useDefault = true;
+
+							foreach ($tagsToRefbaseFieldsArray[$fieldLabel] as $referenceType => $refbaseField) {
+								if ($fieldParametersArray['type'] == $referenceType) {
+									$fieldParametersArray[$refbaseField] = $fieldData;
+									$useDefault = false;
+									break;
+								}
+							}
+
+							if ($useDefault AND isset($tagsToRefbaseFieldsArray[$fieldLabel]['Other'])) {
+								$fieldParametersArray[$tagsToRefbaseFieldsArray[$fieldLabel]['Other']] = $fieldData;
+							}
+						}
+					}
+				}
+				// (END LOOP OVER EACH FIELD)
+
+
+				// POST-PROCESS FIELD DATA:
+
+				if (empty($showSource) AND isset($fieldParametersArray['source'])) // if we're NOT supposed to display the original source data
+				{
+					unset($fieldParametersArray['source']);
+				} // remove the special 'source' field from the array of fields
+
+				// merge individual items of fields that can occur multiple times:
+				foreach ($tagsMultipleArray as $tagMultiple) {
+					if (!is_array($tagsToRefbaseFieldsArray[$tagMultiple])) {
+						if (isset($tagContentsMultipleArray[$tagsToRefbaseFieldsArray[$tagMultiple]])) {
+							$fieldParametersArray[$tagsToRefbaseFieldsArray[$tagMultiple]] = implode("; ", $tagContentsMultipleArray[$tagsToRefbaseFieldsArray[$tagMultiple]]);
+						}
+					} else // if the current tag's value in '$tagsToRefbaseFieldsArray' is an array...
+					{
+						// ...we'll copy field data to different refbase fields depending on the current records reference type:
+						// (see also above note about '$tagsToRefbaseFieldsArray' requiring 'type' as the first element)
+						$useDefault = true;
+
+						foreach ($tagsToRefbaseFieldsArray[$tagMultiple] as $referenceType => $refbaseField) {
+							if ($fieldParametersArray['type'] == $referenceType) {
+								if (isset($tagContentsMultipleArray[$refbaseField])) {
+									$fieldParametersArray[$refbaseField] = implode("; ", $tagContentsMultipleArray[$refbaseField]);
+									$useDefault = false;
+									break;
+								}
+							}
+						}
+
+						if ($useDefault AND isset($tagsToRefbaseFieldsArray[$tagMultiple]['Other'])) {
+							if (isset($tagContentsMultipleArray[$tagsToRefbaseFieldsArray[$tagMultiple]['Other']])) {
+								$fieldParametersArray[$tagsToRefbaseFieldsArray[$tagMultiple]['Other']] =
+									implode("; ", $tagContentsMultipleArray[$tagsToRefbaseFieldsArray[$tagMultiple]['Other']]);
+							}
+						}
+					}
+				}
+
+				// convert format-specific reference types into refbase format:
+				// (e.g. for the RIS format, convert "JOUR" into "Journal Article", etc)
+				if (isset($fieldParametersArray['type'])) {
+					$fieldParametersArray['type'] = searchReplaceText($referenceTypesToRefbaseTypesArray, $fieldParametersArray['type'], false);
+				} // function 'searchReplaceText()' is defined in 'include.inc.php'
+
+				// standardize field data contained in '$fieldParametersArray':
+				// (function 'standardizeFieldData()' e.g. performs case transformation, standardizes thesis names, normalizes page ranges, and reformats person names according to preference)
+				$fieldParametersArray = standardizeFieldData(
+					$fieldParametersArray,
+					$recordFormat,
+					$personDelimiter,
+					$familyNameGivenNameDelimiter,
+					$familyNameFirst,
+					$shortenGivenNames,
+					$transformCase,
+					$postprocessorActionsArray
+				);
 
 				// append the array of extracted field data to the main data array which holds all records to import:
 				$parsedRecordsArray[] = $fieldParametersArray;

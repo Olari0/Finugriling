@@ -1105,7 +1105,9 @@
 									"KW",
 									"UR", // currently, refbase does only support one URL per record (however, we allow 'UR' to occur multiple times to extract any DOI given as URL, otherwise only the first URL will be taken)
 		//							"L1", // currently, refbase does only support one file per record
-									"N1"
+									"N1",
+									"AD",
+									"AB"
 								);
 
 

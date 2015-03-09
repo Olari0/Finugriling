@@ -1623,12 +1623,12 @@
 																		"/[,.;:!] *$/"  =>  "" // remove any punctuation (except for question marks) from end of field contents
 																	)
 												),
-											array(
-													'fields'  => array("publication", "abbrev_journal"), // NOTE: this replacement action will probably be only beneficial for records of type "Journal Article" (if possible, this should rather be a preprocessor action to distinguish articles from books or other resource types)
-													'actions' => array(
-																		"/\b([$lower])([$alpha]{3,})/e$patternModifiers"  =>  "strtoupper('\\1').'\\2'" // make sure that all journal title words (with >3 characters) start with an upper case letter (the 'e' modifier allows to execute PHP code within the replacement pattern)
-																	)
-												),
+//											array(
+//													'fields'  => array("publication", "abbrev_journal"), // NOTE: this replacement action will probably be only beneficial for records of type "Journal Article" (if possible, this should rather be a preprocessor action to distinguish articles from books or other resource types)
+//													'actions' => array(
+//																		"/\b([$lower])([$alpha]{3,})/e$patternModifiers"  =>  "strtoupper('\\1').'\\2'" // make sure that all journal title words (with >3 characters) start with an upper case letter (the 'e' modifier allows to execute PHP code within the replacement pattern)
+//																	)
+//												),
 											array(
 													'fields'  => array("issn"),
 													'actions' => array(

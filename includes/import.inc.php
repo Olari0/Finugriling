@@ -1014,6 +1014,7 @@
 											"CT"  =>  "title", // Title Primary
 		//									""    =>  "orig_title",
 
+											// DATES AND YEARS
 											"PY"  =>  "year", // RIS Spec 2009: Publication Year (four digits); RIS Spec 2004: Date Primary (date must be in the following format: "YYYY/MM/DD/other_info"; the year, month and day fields are all numeric; the other info field can be any string of letters, spaces and hyphens; note that each specific date information is optional, however the slashes ("/") are not)
 											"Y1"  =>  "year", // Date Primary (same syntax rules as for "PY", RIS Spec 2004)
 		//									"Y2"  =>  "", // Date Secondary (same syntax rules as for "PY", RIS Spec 2004)

@@ -86,7 +86,7 @@ div.resultsfooter {
 }
 
 .record {
-    text-transform: capitalize;
+    text-transform: none;
 }
 
 .record:nth-of-type(2n) {
